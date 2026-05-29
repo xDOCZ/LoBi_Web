@@ -1,0 +1,152 @@
+{
+  "imobiliarias": [
+    {
+      "id": 1,
+      "nome": "Lo&Bi Premium",
+      "cnpj": "12.345.678/0001-10",
+      "cidade": "Sao Paulo",
+      "telefone": "+55 11 4002-8922",
+      "email": "premium@lobi.com"
+    },
+    {
+      "id": 2,
+      "nome": "Lo&Bi Prime",
+      "cnpj": "23.456.789/0001-20",
+      "cidade": "Rio de Janeiro",
+      "telefone": "+55 21 3555-1100",
+      "email": "prime@lobi.com"
+    },
+    {
+      "id": 3,
+      "nome": "Lo&Bi Litoral",
+      "cnpj": "34.567.890/0001-30",
+      "cidade": "Salvador",
+      "telefone": "+55 71 3300-4100",
+      "email": "litoral@lobi.com"
+    }
+  ],
+  "corretores": [
+    {
+      "id": 1,
+      "nome": "Marina Costa",
+      "creci": "CRECI-SP 123456",
+      "email": "marina@lobi.com",
+      "telefone": "+55 11 98888-1111",
+      "imobiliariaId": 1,
+      "especialidade": "Alto padrao"
+    },
+    {
+      "id": 2,
+      "nome": "Eduardo Reis",
+      "creci": "CRECI-RJ 987654",
+      "email": "eduardo@lobi.com",
+      "telefone": "+55 21 97777-2222",
+      "imobiliariaId": 2,
+      "especialidade": "Locacao corporativa"
+    },
+    {
+      "id": 3,
+      "nome": "Sofia Andrade",
+      "creci": "CRECI-BA 112233",
+      "email": "sofia@lobi.com",
+      "telefone": "+55 71 96666-3333",
+      "imobiliariaId": 3,
+      "especialidade": "Imoveis de temporada"
+    }
+  ],
+  "imoveis": [
+    {
+      "id": 1,
+      "titulo": "Casa Ipe Modernista",
+      "tipo": "Casa",
+      "operacao": "Venda",
+      "bairro": "Jardins",
+      "cidade": "Sao Paulo",
+      "valor": 4250000,
+      "quartos": 4,
+      "banheiros": 3,
+      "area": 320,
+      "imobiliariaId": 1,
+      "corretorId": 1,
+      "imageKey": "imovel-1",
+      "descricao": "Residencia com area gourmet, piscina e arquitetura contemporanea."
+    },
+    {
+      "id": 2,
+      "titulo": "Penthouse Aurora",
+      "tipo": "Apartamento",
+      "operacao": "Locacao",
+      "bairro": "Vila Olimpia",
+      "cidade": "Sao Paulo",
+      "valor": 12900,
+      "quartos": 3,
+      "banheiros": 2,
+      "area": 210,
+      "imobiliariaId": 1,
+      "corretorId": 1,
+      "imageKey": "imovel-2",
+      "descricao": "Cobertura duplex com vista panoramica e varanda integrada."
+    },
+    {
+      "id": 3,
+      "titulo": "Casa de Campo Oliveira",
+      "tipo": "Casa",
+      "operacao": "Venda",
+      "bairro": "Serra da Mantiqueira",
+      "cidade": "Campos do Jordao",
+      "valor": 2890000,
+      "quartos": 5,
+      "banheiros": 4,
+      "area": 480,
+      "imobiliariaId": 2,
+      "corretorId": 2,
+      "imageKey": "imovel-3",
+      "descricao": "Propriedade para familias com lareira, jardim amplo e vista serrana."
+    },
+    {
+      "id": 4,
+      "titulo": "Paraiso Praiano",
+      "tipo": "Casa",
+      "operacao": "Venda",
+      "bairro": "Itapua",
+      "cidade": "Salvador",
+      "valor": 10500000,
+      "quartos": 5,
+      "banheiros": 2,
+      "area": 620,
+      "imobiliariaId": 3,
+      "corretorId": 3,
+      "imageKey": "imovel-6",
+      "descricao": "Imovel pe na areia para residencia ou investimento em locacao de temporada."
+    }
+  ],
+  "propostas": [
+    {
+      "id": 1,
+      "imovelId": 2,
+      "cliente": "Renata Lima",
+      "valorOferta": 12500,
+      "status": "Em analise",
+      "dataContato": "2026-05-10",
+      "corretorId": 1
+    },
+    {
+      "id": 2,
+      "imovelId": 3,
+      "cliente": "Carlos Nogueira",
+      "valorOferta": 2790000,
+      "status": "Aprovada",
+      "dataContato": "2026-05-15",
+      "corretorId": 2
+    },
+    {
+      "id": 3,
+      "imovelId": 4,
+      "cliente": "Fernanda Souza",
+      "valorOferta": 10150000,
+      "status": "Negociacao",
+      "dataContato": "2026-05-18",
+      "corretorId": 3
+    }
+  ]
+}

@@ -9,115 +9,65 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as PropostasRouteImport } from './routes/propostas'
 import { Route as ImoveisRouteImport } from './routes/imoveis'
+import { Route as ImobiliariasRouteImport } from './routes/imobiliarias'
 import { Route as AgentesRouteImport } from './routes/agentes'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ImoveisIdRouteImport } from './routes/imoveis.$id'
 
+const PropostasRoute = PropostasRouteImport.update({
+  id: '/propostas',
+  path: '/propostas',
+  getParentRoute: () => rootRouteImport,
+})
 const ImoveisRoute = ImoveisRouteImport.update({
   id: '/imoveis',
   path: '/imoveis',
   getParentRoute: () => rootRouteImport,
-} )
+})
+const ImobiliariasRoute = ImobiliariasRouteImport.update({
+  id: '/imobiliarias',
+  path: '/imobiliarias',
+  getParentRoute: () => rootRouteImport,
+})
 const AgentesRoute = AgentesRouteImport.update({
   id: '/agentes',
   path: '/agentes',
   getParentRoute: () => rootRouteImport,
-} )
+})
 const AdminRoute = AdminRouteImport.update({
   id: '/admin',
   path: '/admin',
   getParentRoute: () => rootRouteImport,
-} )
+})
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
-} )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+})
+const ImoveisIdRoute = ImoveisIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => ImoveisRoute,
+})
+
+const ImoveisRouteChildren = {
+  ImoveisIdRoute: ImoveisIdRoute,
+}
+
+const ImoveisRouteWithChildren = ImoveisRoute._addFileChildren(ImoveisRouteChildren)
 
 const rootRouteChildren = {
-  IndexRoute: IndexRoute,
-  AdminRoute: AdminRoute,
-  AgentesRoute: AgentesRoute,
-  ImoveisRoute: ImoveisRoute,
+  IndexRoute,
+  AdminRoute,
+  AgentesRoute,
+  ImobiliariasRoute,
+  ImoveisRoute: ImoveisRouteWithChildren,
+  PropostasRoute,
 }
+
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes()
-
-
-
-
-
-
-
-
-
-

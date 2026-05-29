@@ -1,71 +1,63 @@
-const _jsxFileName = "";import {jsxDEV as _jsxDEV} from "react/jsx-dev-runtime";import { QueryClientProvider } from "@tanstack/react-query";
-import { useEffect, useMemo, useState } from "react";
+import { QueryClientProvider } from "@tanstack/react-query";
 import {
   Outlet,
-  Link,
   createRootRouteWithContext,
   useRouter,
   HeadContent,
   Scripts,
+  Link,
 } from "@tanstack/react-router";
+import { useEffect, useMemo, useState } from "react";
 
-import { AuthContext } from "@/lib/auth";
 import appCss from "../styles.css?url";
+import { AuthContext } from "@/lib/auth";
+import { DataContext } from "@/lib/data-context";
+import { loadLocacaoData } from "@/lib/data-loader";
 
 function NotFoundComponent() {
   return (
-    _jsxDEV('div', { className: "flex min-h-screen items-center justify-center bg-background px-4"     , children: 
-      _jsxDEV('div', { className: "max-w-md text-center" , children: [
-        _jsxDEV('h1', { className: "text-7xl font-bold text-foreground"  , children: "404"}, void 0, false, {fileName: _jsxFileName, lineNumber: 19}, this)
-        , _jsxDEV('h2', { className: "mt-4 text-xl font-semibold text-foreground"   , children: "Page not found"  }, void 0, false, {fileName: _jsxFileName, lineNumber: 20}, this)
-        , _jsxDEV('p', { className: "mt-2 text-sm text-muted-foreground"  , children: "The page you're looking for doesn't exist or has been moved."
-
-        }, void 0, false, {fileName: _jsxFileName, lineNumber: 21}, this)
-        , _jsxDEV('div', { className: "mt-6", children: 
-          _jsxDEV(Link, {
-            to: "/",
-            className: "inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"           ,
- children: "Go home"
-
-          }, void 0, false, {fileName: _jsxFileName, lineNumber: 25}, this)
-        }, void 0, false, {fileName: _jsxFileName, lineNumber: 24}, this)
-      ]}, void 0, true, {fileName: _jsxFileName, lineNumber: 18}, this)
-    }, void 0, false, {fileName: _jsxFileName, lineNumber: 17}, this)
+    <div className="flex min-h-screen items-center justify-center px-4">
+      <div className="max-w-md text-center">
+        <h1 className="text-6xl font-bold">404</h1>
+        <p className="mt-4 text-muted-foreground">A pagina solicitada nao foi encontrada.</p>
+        <Link
+          to="/"
+          className="mt-6 inline-flex rounded-sm border border-border px-4 py-2 hover:bg-muted"
+        >
+          Voltar para inicio
+        </Link>
+      </div>
+    </div>
   );
 }
 
 function ErrorComponent({ error, reset }) {
-  console.error(error);
   const router = useRouter();
+  console.error(error);
 
   return (
-    _jsxDEV('div', { className: "flex min-h-screen items-center justify-center bg-background px-4"     , children: 
-      _jsxDEV('div', { className: "max-w-md text-center" , children: [
-        _jsxDEV('h1', { className: "text-xl font-semibold tracking-tight text-foreground"   , children: "This page didn't load"
-
-        }, void 0, false, {fileName: _jsxFileName, lineNumber: 44}, this)
-        , _jsxDEV('p', { className: "mt-2 text-sm text-muted-foreground"  , children: "Something went wrong on our end. You can try refreshing or head back home."
-
-        }, void 0, false, {fileName: _jsxFileName, lineNumber: 47}, this)
-        , _jsxDEV('div', { className: "mt-6 flex flex-wrap justify-center gap-2"    , children: [
-          _jsxDEV('button', {
-            onClick: () => {
+    <div className="flex min-h-screen items-center justify-center px-4">
+      <div className="max-w-md text-center">
+        <h1 className="text-2xl font-semibold">Erro ao carregar pagina</h1>
+        <p className="mt-3 text-muted-foreground">
+          Tente novamente. Se o problema persistir, recarregue o navegador.
+        </p>
+        <div className="mt-5 flex justify-center gap-2">
+          <button
+            onClick={() => {
               router.invalidate();
               reset();
-            },
-            className: "inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"           ,
- children: "Try again"
-
-          }, void 0, false, {fileName: _jsxFileName, lineNumber: 51}, this)
-          , _jsxDEV('a', {
-            href: "/",
-            className: "inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"             ,
- children: "Go home"
-
-          }, void 0, false, {fileName: _jsxFileName, lineNumber: 60}, this)
-        ]}, void 0, true, {fileName: _jsxFileName, lineNumber: 50}, this)
-      ]}, void 0, true, {fileName: _jsxFileName, lineNumber: 43}, this)
-    }, void 0, false, {fileName: _jsxFileName, lineNumber: 42}, this)
+            }}
+            className="rounded-sm border border-border px-4 py-2 hover:bg-muted"
+          >
+            Tentar novamente
+          </button>
+          <Link to="/" className="rounded-sm border border-border px-4 py-2 hover:bg-muted">
+            Inicio
+          </Link>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -74,81 +66,140 @@ export const Route = createRootRouteWithContext()({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lo & Bi — Imóveis curados" },
-      { name: "description", content: "Encontre, compre e alugue imóveis exclusivos com agentes especializados." },
-      { name: "author", content: "Lo & Bi" },
-      { property: "og:title", content: "Lo & Bi — Imóveis curados" },
-      { property: "og:description", content: "Encontre, compre e alugue imóveis exclusivos com agentes especializados." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
-      { name: "twitter:title", content: "Lo & Bi — Imóveis curados" },
-      { name: "twitter:description", content: "Encontre, compre e alugue imóveis exclusivos com agentes especializados." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/50d9522a-02ac-499c-b37c-741a11299c8b/id-preview-50c10255--10406b0a-aa24-4106-9003-d9d1969a65aa.lovable.app-1778883244262.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/50d9522a-02ac-499c-b37c-741a11299c8b/id-preview-50c10255--10406b0a-aa24-4106-9003-d9d1969a65aa.lovable.app-1778883244262.png" },
+      { title: "Lo&Bi Locacao" },
+      {
+        name: "description",
+        content:
+          "SPA de locacao de imoveis com gerenciamento de imobiliarias, imoveis, corretores e propostas.",
+      },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Work+Sans:wght@300;400;500;600&display=swap" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Work+Sans:wght@300;400;500;600&display=swap",
+      },
       { rel: "stylesheet", href: appCss },
     ],
   }),
   shellComponent: RootShell,
   component: RootComponent,
-  notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent,
+  notFoundComponent: NotFoundComponent,
 });
 
 function RootShell({ children }) {
   return (
-    _jsxDEV('html', { lang: "en", children: [
-      _jsxDEV('head', { children: 
-        _jsxDEV(HeadContent, {}, void 0, false, {fileName: _jsxFileName, lineNumber: 107}, this )
-      }, void 0, false, {fileName: _jsxFileName, lineNumber: 106}, this)
-      , _jsxDEV('body', { children: [
-        children
-        , _jsxDEV(Scripts, {}, void 0, false, {fileName: _jsxFileName, lineNumber: 111}, this )
-      ]}, void 0, true, {fileName: _jsxFileName, lineNumber: 109}, this)
-    ]}, void 0, true, {fileName: _jsxFileName, lineNumber: 105}, this)
+    <html lang="pt-BR">
+      <head>
+        <HeadContent />
+      </head>
+      <body>
+        {children}
+        <Scripts />
+      </body>
+    </html>
   );
 }
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const [isAdmin, setIsAdmin] = useState(false);
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const stored = window.localStorage.getItem("lobi-admin");
-      setIsAdmin(stored === "true");
+    const stored = window.localStorage.getItem("lobi-admin");
+    setIsAdmin(stored === "true");
+  }, []);
+
+  useEffect(() => {
+    async function bootstrap() {
+      try {
+        setLoading(true);
+        const payload = await loadLocacaoData();
+        setData(payload);
+        setError("");
+      } catch (loadError) {
+        console.error(loadError);
+        setError("Nao foi possivel carregar os dados do arquivo JSON.");
+      } finally {
+        setLoading(false);
+      }
     }
+
+    bootstrap();
   }, []);
 
   const authContext = useMemo(
     () => ({
       isAdmin,
       login: (username, password) => {
-        const isValid = username === "admin" && password === "admin123";
-        if (isValid) {
+        const valid = username === "admin" && password === "admin123";
+        if (valid) {
           setIsAdmin(true);
           window.localStorage.setItem("lobi-admin", "true");
         }
-        return isValid;
+        return valid;
       },
       logout: () => {
         setIsAdmin(false);
         window.localStorage.removeItem("lobi-admin");
       },
     }),
-    [isAdmin]
+    [isAdmin],
+  );
+
+  const dataContext = useMemo(
+    () => ({
+      data,
+      loading,
+      error,
+      createRecord: (entityKey, record) => {
+        setData((current) => {
+          if (!current) return current;
+          const list = current[entityKey] || [];
+          const nextId = list.length ? Math.max(...list.map((item) => item.id)) + 1 : 1;
+          return { ...current, [entityKey]: [...list, { id: nextId, ...record }] };
+        });
+      },
+      updateRecord: (entityKey, id, changes) => {
+        setData((current) => {
+          if (!current) return current;
+          return {
+            ...current,
+            [entityKey]: (current[entityKey] || []).map((item) =>
+              item.id === id ? { ...item, ...changes } : item,
+            ),
+          };
+        });
+      },
+      deleteRecord: (entityKey, id) => {
+        setData((current) => {
+          if (!current) return current;
+          return {
+            ...current,
+            [entityKey]: (current[entityKey] || []).filter((item) => item.id !== id),
+          };
+        });
+      },
+      async reloadFromJson() {
+        const payload = await loadLocacaoData();
+        setData(payload);
+      },
+    }),
+    [data, error, loading],
   );
 
   return (
-    _jsxDEV(AuthContext.Provider, { value: authContext, children: 
-      _jsxDEV(QueryClientProvider, { client: queryClient, children: 
-        _jsxDEV(Outlet, {}, void 0, false, {fileName: _jsxFileName, lineNumber: 150}, this )
-      }, void 0, false, {fileName: _jsxFileName, lineNumber: 149}, this)
-    }, void 0, false, {fileName: _jsxFileName, lineNumber: 148}, this)
+    <AuthContext.Provider value={authContext}>
+      <DataContext.Provider value={dataContext}>
+        <QueryClientProvider client={queryClient}>
+          <Outlet />
+        </QueryClientProvider>
+      </DataContext.Provider>
+    </AuthContext.Provider>
   );
 }

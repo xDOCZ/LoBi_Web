@@ -1,75 +1,59 @@
-# Lobi — Locação Imobiliária
+# Lo&Bi - Locacao de Imoveis (SPODWE2)
 
-Projeto SPA em React para a disciplina de Desenvolvimento Web 2 (SPODWE2), no domínio de **Locação de Imóveis**.
+Aplicacao SPA em React para o tema Locacao de Imoveis da disciplina SPODWE2.
 
-## Objetivo
+## Entidades de negocio
 
-Aplicação front-end para gerenciamento de entidades de negócio com CRUD completo, carregando conteúdo de um arquivo JSON local.
+- Imobiliarias
+- Imoveis
+- Corretores
+- Propostas
 
-Entidades implementadas:
+## Requisitos implementados
 
-- `Imobiliária`
-- `Imóvel`
-- `Corretor`
-- `Proposta`
-
-## Requisitos atendidos
-
-- ✅ React (SPA)
-- ✅ Componentização da UI
-- ✅ JSX
-- ✅ Uso de `props` e `state`
-- ✅ Rotas com `react-router-dom`
-- ✅ Carregamento dinâmico a partir de `public/data.json`
-- ✅ Tabelas com CRUD (criar, editar e excluir)
-- ✅ Front-end apenas (sem backend e sem banco relacional)
-- ✅ Loading com animação de marca: **Lobi → Locação imobiliária**
+- React com arquitetura SPA
+- Componentizacao da interface
+- JSX
+- Props e state
+- Navegacao por rotas
+- Carregamento dinamico de dados por JSON
+- Uso de repositorio local de imagens
+- Tabelas com criar, alterar e excluir registros
+- Projeto exclusivamente front-end
 
 ## Estrutura principal
 
-- `src/App.jsx` — layout geral + rotas
-- `src/components/Loading.jsx` — animação inicial
-- `src/components/CrudTable.jsx` — tabela/formulário CRUD reutilizável
-- `src/pages/Home.jsx` — visão geral
-- `src/pages/Catalog.jsx` — catálogo de imóveis
-- `src/pages/Dashboard.jsx` — painel de controle CRUD
-- `src/utils/data.js` — leitura do JSON e download do JSON atualizado
-- `public/data.json` — base de dados local
+- `src/data/locacao.json`: base de dados do dominio
+- `src/lib/data-loader.js`: carregamento dinamico do JSON
+- `src/lib/data-context.js`: estado global e operacoes CRUD
+- `src/components/entity-crud-table.jsx`: tabela CRUD reutilizavel
+- `src/components/app-layout.jsx`: layout com menu e cabecalho
+- `src/routes/*.jsx`: paginas e rotas da aplicacao
 
-## Como executar
+## Acesso admin
 
-### 1) Instalar dependências
+- Usuario: `admin`
+- Senha: `admin123`
 
-```powershell
+Sem login, o usuario navega e consulta os dados.
+Com login, habilita criar/editar/excluir nas tabelas.
+
+## Execucao
+
+```bash
 npm install
-```
-
-### 2) Rodar ambiente de desenvolvimento
-
-```powershell
 npm run dev
 ```
 
-### 3) Gerar build de produção
+Build de producao:
 
-```powershell
+```bash
 npm run build
 ```
 
-## Fluxo do “banco JSON”
+## Entrega no Moodle
 
-- A aplicação carrega dados de `public/data.json` no início.
-- O CRUD altera os dados em memória (state da aplicação).
-- O botão **“Baixar JSON atualizado”** exporta um arquivo `data.updated.json` com o estado atual.
-- O botão **“Recarregar JSON de origem”** recarrega do `public/data.json` (inclusive alterações feitas manualmente nesse arquivo durante a execução).
-
-> Observação: como o projeto é apenas front-end, a escrita direta em `public/data.json` pelo navegador não é possível sem backend. O fluxo de exportar/importar JSON é a solução compatível com a restrição da disciplina.
-
-## Checklist para entrega no Moodle
-
-- [ ] Rodar `npm run build` sem erros
-- [ ] Remover pasta `node_modules` antes de compactar
-- [ ] Compactar em `.zip` ou `.rar`
-- [ ] Nomear arquivo conforme regra da disciplina:
-	- `ProjetoDWE2_NomeSobrenomeAluno1_NomeSobrenomeAluno2_NomeSobrenomeAluno3.zip`
+- Remover `node_modules` antes de compactar
+- Compactar em `.zip` ou `.rar`
+- Nomear o arquivo conforme a regra da disciplina
 

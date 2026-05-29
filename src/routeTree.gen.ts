@@ -9,14 +9,27 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as PropostasRouteImport } from './routes/propostas'
 import { Route as ImoveisRouteImport } from './routes/imoveis'
+import { Route as ImobiliariasRouteImport } from './routes/imobiliarias'
 import { Route as AgentesRouteImport } from './routes/agentes'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ImoveisIdRouteImport } from './routes/imoveis.$id'
 
+const PropostasRoute = PropostasRouteImport.update({
+  id: '/propostas',
+  path: '/propostas',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ImoveisRoute = ImoveisRouteImport.update({
   id: '/imoveis',
   path: '/imoveis',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ImobiliariasRoute = ImobiliariasRouteImport.update({
+  id: '/imobiliarias',
+  path: '/imobiliarias',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AgentesRoute = AgentesRouteImport.update({
@@ -34,48 +47,100 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ImoveisIdRoute = ImoveisIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => ImoveisRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/agentes': typeof AgentesRoute
-  '/imoveis': typeof ImoveisRoute
+  '/imobiliarias': typeof ImobiliariasRoute
+  '/imoveis': typeof ImoveisRouteWithChildren
+  '/propostas': typeof PropostasRoute
+  '/imoveis/$id': typeof ImoveisIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/agentes': typeof AgentesRoute
-  '/imoveis': typeof ImoveisRoute
+  '/imobiliarias': typeof ImobiliariasRoute
+  '/imoveis': typeof ImoveisRouteWithChildren
+  '/propostas': typeof PropostasRoute
+  '/imoveis/$id': typeof ImoveisIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/agentes': typeof AgentesRoute
-  '/imoveis': typeof ImoveisRoute
+  '/imobiliarias': typeof ImobiliariasRoute
+  '/imoveis': typeof ImoveisRouteWithChildren
+  '/propostas': typeof PropostasRoute
+  '/imoveis/$id': typeof ImoveisIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/admin' | '/agentes' | '/imoveis'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/agentes'
+    | '/imobiliarias'
+    | '/imoveis'
+    | '/propostas'
+    | '/imoveis/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/admin' | '/agentes' | '/imoveis'
-  id: '__root__' | '/' | '/admin' | '/agentes' | '/imoveis'
+  to:
+    | '/'
+    | '/admin'
+    | '/agentes'
+    | '/imobiliarias'
+    | '/imoveis'
+    | '/propostas'
+    | '/imoveis/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/agentes'
+    | '/imobiliarias'
+    | '/imoveis'
+    | '/propostas'
+    | '/imoveis/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRoute
   AgentesRoute: typeof AgentesRoute
-  ImoveisRoute: typeof ImoveisRoute
+  ImobiliariasRoute: typeof ImobiliariasRoute
+  ImoveisRoute: typeof ImoveisRouteWithChildren
+  PropostasRoute: typeof PropostasRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/propostas': {
+      id: '/propostas'
+      path: '/propostas'
+      fullPath: '/propostas'
+      preLoaderRoute: typeof PropostasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/imoveis': {
       id: '/imoveis'
       path: '/imoveis'
       fullPath: '/imoveis'
       preLoaderRoute: typeof ImoveisRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/imobiliarias': {
+      id: '/imobiliarias'
+      path: '/imobiliarias'
+      fullPath: '/imobiliarias'
+      preLoaderRoute: typeof ImobiliariasRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/agentes': {
@@ -99,14 +164,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/imoveis/$id': {
+      id: '/imoveis/$id'
+      path: '/$id'
+      fullPath: '/imoveis/$id'
+      preLoaderRoute: typeof ImoveisIdRouteImport
+      parentRoute: typeof ImoveisRoute
+    }
   }
 }
+
+interface ImoveisRouteChildren {
+  ImoveisIdRoute: typeof ImoveisIdRoute
+}
+
+const ImoveisRouteChildren: ImoveisRouteChildren = {
+  ImoveisIdRoute: ImoveisIdRoute,
+}
+
+const ImoveisRouteWithChildren =
+  ImoveisRoute._addFileChildren(ImoveisRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRoute,
   AgentesRoute: AgentesRoute,
-  ImoveisRoute: ImoveisRoute,
+  ImobiliariasRoute: ImobiliariasRoute,
+  ImoveisRoute: ImoveisRouteWithChildren,
+  PropostasRoute: PropostasRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
