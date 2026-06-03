@@ -39,7 +39,10 @@ function ImovelDetailPage() {
   const corretor = data.corretores.find((item) => item.id === imovel.corretorId);
 
   return (
-    <AppLayout title={imovel.titulo} subtitle="Pagina dinamica gerada por rota /imoveis/$id com dados em tempo real.">
+    <AppLayout
+      title={imovel.titulo}
+      subtitle={`${imovel.tipo} para ${imovel.operacao.toLowerCase()} em ${imovel.bairro}, ${imovel.cidade}.`}
+    >
       <article className="overflow-hidden rounded-sm border border-border bg-card">
         <img
           src={imageMap[imovel.imageKey]}

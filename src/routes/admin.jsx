@@ -24,18 +24,18 @@ function AdminPage() {
   return (
     <AppLayout
       title="Painel Administrativo"
-      subtitle="Acesso para habilitar as acoes de criar, editar e excluir em todas as entidades."
+      subtitle="Acesso restrito para habilitar criacao, edicao e exclusao em todas as entidades do dominio."
     >
       <section className="rounded-sm border border-border bg-card p-5">
         {isAdmin ? (
           <div className="space-y-4">
-            <p className="text-sm text-muted-foreground">Administrador autenticado.</p>
+            <p className="text-sm text-muted-foreground">Sessao administrativa ativa.</p>
             <div className="flex flex-wrap gap-2">
               <button
                 onClick={logout}
                 className="rounded-sm border border-border px-4 py-2 text-sm hover:bg-muted"
               >
-                Encerrar sessao
+                Sair da area admin
               </button>
               <button
                 onClick={async () => {
@@ -62,7 +62,7 @@ function AdminPage() {
                 }}
                 className="rounded-sm border border-border px-4 py-2 text-sm hover:bg-muted"
               >
-                Baixar JSON atualizado
+                Exportar JSON atualizado
               </button>
             </div>
             <div className="text-sm text-muted-foreground">

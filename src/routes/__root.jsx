@@ -19,12 +19,12 @@ function NotFoundComponent() {
     <div className="flex min-h-screen items-center justify-center px-4">
       <div className="max-w-md text-center">
         <h1 className="text-6xl font-bold">404</h1>
-        <p className="mt-4 text-muted-foreground">A pagina solicitada nao foi encontrada.</p>
+        <p className="mt-4 text-muted-foreground">Esta pagina nao esta disponivel no momento.</p>
         <Link
           to="/"
           className="mt-6 inline-flex rounded-sm border border-border px-4 py-2 hover:bg-muted"
         >
-          Voltar para inicio
+          Voltar para a home
         </Link>
       </div>
     </div>
@@ -38,9 +38,9 @@ function ErrorComponent({ error, reset }) {
   return (
     <div className="flex min-h-screen items-center justify-center px-4">
       <div className="max-w-md text-center">
-        <h1 className="text-2xl font-semibold">Erro ao carregar pagina</h1>
+        <h1 className="text-2xl font-semibold">Nao foi possivel abrir esta pagina</h1>
         <p className="mt-3 text-muted-foreground">
-          Tente novamente. Se o problema persistir, recarregue o navegador.
+          Tente novamente em instantes. Se persistir, atualize a sessao no navegador.
         </p>
         <div className="mt-5 flex justify-center gap-2">
           <button
@@ -53,7 +53,7 @@ function ErrorComponent({ error, reset }) {
             Tentar novamente
           </button>
           <Link to="/" className="rounded-sm border border-border px-4 py-2 hover:bg-muted">
-            Inicio
+            Home
           </Link>
         </div>
       </div>

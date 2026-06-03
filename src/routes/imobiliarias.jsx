@@ -21,7 +21,7 @@ function ImobiliariasPage() {
   return (
     <AppLayout
       title="Imobiliarias"
-      subtitle="Cadastro detalhado de empresas de locacao com contatos e CNPJ."
+      subtitle="Empresas parceiras com estrutura comercial, contato e cobertura regional."
     >
       <section className="mb-6 grid gap-4 md:grid-cols-3">
         {data.imobiliarias.map((item) => (
@@ -37,7 +37,7 @@ function ImobiliariasPage() {
 
       <EntityCrudTable
         title="CRUD de Imobiliarias"
-        description="Tabela com criacao, alteracao e exclusao de imobiliarias."
+        description="Mantenha a base de imobiliarias parceiras sempre atualizada."
         rows={data.imobiliarias}
         fields={[
           { name: "nome", label: "Nome", required: true },

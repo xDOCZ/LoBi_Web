@@ -66,60 +66,62 @@ export function EntityCrudTable({
   };
 
   return (
-    <section className="rounded-sm border border-border bg-card p-5 shadow-[var(--shadow-soft)]">
+    <section className="rounded-sm border border-border bg-card p-5 shadow-[var(--shadow-elegant)]">
       <div className="mb-4">
         <h2 className="font-display text-3xl text-[var(--olive-deep)]">{title}</h2>
         {description ? <p className="mt-2 text-sm text-muted-foreground">{description}</p> : null}
       </div>
 
       {isAdmin ? (
-        <div className="mb-4 grid gap-3 md:grid-cols-2 lg:grid-cols-4">
-          {fields.map((field) => (
-            <label key={field.name} className="text-sm">
-              <span className="mb-1 block text-muted-foreground">{field.label}</span>
-              {field.options ? (
-                <select
-                  value={form[field.name]}
-                  onChange={(event) =>
-                    setForm((current) => ({ ...current, [field.name]: event.target.value }))
-                  }
-                  className="w-full rounded-sm border border-border bg-background px-3 py-2"
-                >
-                  <option value="">Selecione</option>
-                  {field.options.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
-              ) : (
-                <input
-                  value={form[field.name]}
-                  type={field.type === "number" ? "number" : "text"}
-                  onChange={(event) =>
-                    setForm((current) => ({ ...current, [field.name]: event.target.value }))
-                  }
-                  className="w-full rounded-sm border border-border bg-background px-3 py-2"
-                />
-              )}
-            </label>
-          ))}
-          <button
-            onClick={handleCreate}
-            className="self-end rounded-sm bg-[var(--gold)] px-4 py-2 text-sm font-medium text-[var(--olive-deep)] hover:bg-[var(--gold-deep)]"
-          >
-            Criar registro
-          </button>
+        <div className="mb-4 rounded-sm border border-border bg-background/70 p-4">
+          <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
+            {fields.map((field) => (
+              <label key={field.name} className="text-sm">
+                <span className="mb-1 block text-muted-foreground">{field.label}</span>
+                {field.options ? (
+                  <select
+                    value={form[field.name]}
+                    onChange={(event) =>
+                      setForm((current) => ({ ...current, [field.name]: event.target.value }))
+                    }
+                    className="w-full rounded-sm border border-border bg-card px-3 py-2 outline-none focus:border-[var(--gold)]"
+                  >
+                    <option value="">Selecione uma opcao</option>
+                    {field.options.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                ) : (
+                  <input
+                    value={form[field.name]}
+                    type={field.type === "number" ? "number" : "text"}
+                    onChange={(event) =>
+                      setForm((current) => ({ ...current, [field.name]: event.target.value }))
+                    }
+                    className="w-full rounded-sm border border-border bg-card px-3 py-2 outline-none focus:border-[var(--gold)]"
+                  />
+                )}
+              </label>
+            ))}
+            <button
+              onClick={handleCreate}
+              className="self-end rounded-full bg-[var(--gold)] px-4 py-2 text-sm font-medium text-[var(--olive-deep)] transition hover:bg-[var(--gold-deep)] hover:text-cream"
+            >
+              Adicionar registro
+            </button>
+          </div>
         </div>
       ) : (
         <p className="mb-4 rounded-sm border border-border bg-muted p-3 text-sm text-muted-foreground">
-          Apenas o administrador pode criar, editar e excluir registros.
+          Acesso administrativo necessario para criar, editar e excluir registros.
         </p>
       )}
 
       <div className="overflow-auto">
         <table className="w-full min-w-[760px] border-collapse text-sm">
-          <thead className="bg-muted text-left">
+          <thead className="bg-muted text-left text-[var(--olive-deep)]">
             <tr>
               <th className="px-3 py-2">ID</th>
               {headers.map((header) => (
@@ -127,12 +129,19 @@ export function EntityCrudTable({
                   {header}
                 </th>
               ))}
-              <th className="px-3 py-2">Acoes</th>
+              <th className="px-3 py-2">Gestao</th>
             </tr>
           </thead>
           <tbody>
+            {rows.length === 0 ? (
+              <tr className="border-t border-border">
+                <td colSpan={fields.length + 2} className="px-3 py-6 text-center text-muted-foreground">
+                  Nenhum registro disponivel nesta entidade.
+                </td>
+              </tr>
+            ) : null}
             {rows.map((row) => (
-              <tr key={row.id} className="border-t border-border">
+              <tr key={row.id} className="border-t border-border transition hover:bg-muted/35">
                 <td className="px-3 py-2 text-muted-foreground">{row.id}</td>
                 {fields.map((field) => (
                   <td key={`${row.id}-${field.name}`} className="px-3 py-2">
@@ -146,9 +155,9 @@ export function EntityCrudTable({
                               [field.name]: event.target.value,
                             }))
                           }
-                          className="w-full rounded-sm border border-border bg-background px-2 py-1"
+                          className="w-full rounded-sm border border-border bg-background px-2 py-1 outline-none focus:border-[var(--gold)]"
                         >
-                          <option value="">Selecione</option>
+                          <option value="">Selecione uma opcao</option>
                           {field.options.map((option) => (
                             <option key={option.value} value={option.value}>
                               {option.label}
@@ -165,7 +174,7 @@ export function EntityCrudTable({
                               [field.name]: event.target.value,
                             }))
                           }
-                          className="w-full rounded-sm border border-border bg-background px-2 py-1"
+                          className="w-full rounded-sm border border-border bg-background px-2 py-1 outline-none focus:border-[var(--gold)]"
                         />
                       )
                     ) : (
@@ -179,13 +188,13 @@ export function EntityCrudTable({
                       <div className="flex gap-2">
                         <button
                           onClick={saveEdit}
-                          className="rounded-sm border border-border px-2 py-1 hover:bg-muted"
+                          className="rounded-full border border-border px-3 py-1 transition hover:bg-muted"
                         >
                           Salvar
                         </button>
                         <button
                           onClick={() => setEditingId(null)}
-                          className="rounded-sm border border-border px-2 py-1 hover:bg-muted"
+                          className="rounded-full border border-border px-3 py-1 transition hover:bg-muted"
                         >
                           Cancelar
                         </button>
@@ -194,20 +203,20 @@ export function EntityCrudTable({
                       <div className="flex gap-2">
                         <button
                           onClick={() => startEdit(row)}
-                          className="rounded-sm border border-border px-2 py-1 hover:bg-muted"
+                          className="rounded-full border border-border px-3 py-1 transition hover:bg-muted"
                         >
                           Editar
                         </button>
                         <button
                           onClick={() => onDelete(row.id)}
-                          className="rounded-sm border border-border px-2 py-1 hover:bg-muted"
+                          className="rounded-full border border-border px-3 py-1 transition hover:bg-muted"
                         >
                           Excluir
                         </button>
                       </div>
                     )
                   ) : (
-                    <span className="text-xs text-muted-foreground">Somente admin</span>
+                    <span className="text-xs text-muted-foreground">Acesso admin</span>
                   )}
                 </td>
               </tr>

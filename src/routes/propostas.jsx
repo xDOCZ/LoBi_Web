@@ -31,18 +31,17 @@ function PropostasPage() {
   return (
     <AppLayout
       title="Propostas"
-      subtitle="Entidade de negocio Proposta, relacionada a imoveis e corretores."
+      subtitle="Etapa comercial que conecta cliente, imovel, corretor e status da negociacao."
     >
       <section className="mb-6 rounded-sm border border-border bg-card p-5">
         <p className="text-sm text-muted-foreground">
-          Esta tabela registra o fluxo comercial de locacao e venda: cliente, valor ofertado, status e
-          data de contato.
+          Acompanhe o fluxo de propostas em locacao e venda com historico de contato e valor ofertado.
         </p>
       </section>
 
       <EntityCrudTable
         title="CRUD de Propostas"
-        description="Criacao, alteracao e exclusao de propostas comerciais."
+        description="Gerencie propostas comerciais e atualize o andamento de cada negociacao."
         rows={data.propostas}
         fields={[
           {

@@ -26,7 +26,7 @@ function CorretoresPage() {
   return (
     <AppLayout
       title="Corretores"
-      subtitle="Entidade de negocio Corretor com detalhes de CRECI, contato e vinculacao com imobiliaria."
+      subtitle="Equipe de especialistas com CRECI, contato direto e vinculacao por imobiliaria."
     >
       <section className="mb-6 grid gap-4 md:grid-cols-3">
         {data.corretores.map((corretor) => {
@@ -47,7 +47,7 @@ function CorretoresPage() {
 
       <EntityCrudTable
         title="CRUD de Corretores"
-        description="Gerencie cadastro de corretores para atendimento das locacoes."
+        description="Gerencie o time de corretores responsavel pelo atendimento consultivo."
         rows={data.corretores}
         fields={[
           { name: "nome", label: "Nome", required: true },
