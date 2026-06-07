@@ -1,0 +1,8 @@
+Single Page Application: atendido no fluxo principal em app-root.jsx e react-router-app.jsx.
+Componentização da interface: atendido em components (ex.: app-layout.jsx, entity-crud-table.jsx).
+JSX: atendido em todas as páginas/componentes React.
+Props: atendido (ex.: AppLayout recebe title, subtitle, children em app-layout.jsx).
+State: atendido (ex.: formulários e autenticação em admin-page.jsx, entity-crud-table.jsx).
+Rotas com React Router: atendido em react-router-app.jsx com BrowserRouter, Routes e Route.
+Carregamento dinâmico de conteúdo por imagens + JSON: atendido em data-loader.js, locacao.json, image-map.js.
+CRUD (criar, alterar, excluir): atendido em entity-crud-table.jsx e páginas de entidades em pages.

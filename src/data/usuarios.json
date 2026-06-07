@@ -1,0 +1,14 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "nome": "Administrador Lo&Bi",
+      "username": "admin",
+      "email": "admin@lobi.com",
+      "password": "admin123",
+      "role": "admin",
+      "active": true,
+      "createdAt": "2026-06-07T00:00:00.000Z"
+    }
+  ]
+}

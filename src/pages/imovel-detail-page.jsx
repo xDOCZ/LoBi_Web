@@ -1,14 +1,10 @@
-import { Link, createFileRoute } from "@tanstack/react-router";
+import { Link, useParams } from "react-router-dom";
 import { AppLayout } from "@/components/app-layout";
 import { useDataStore } from "@/lib/data-context";
 import { imageMap } from "@/lib/image-map";
 
-export const Route = createFileRoute("/imoveis/$id")({
-  component: ImovelDetailPage,
-});
-
-function ImovelDetailPage() {
-  const { id } = Route.useParams();
+export function ImovelDetailPage() {
+  const { id } = useParams();
   const { data, loading, error } = useDataStore();
 
   if (loading) {

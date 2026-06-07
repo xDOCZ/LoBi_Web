@@ -1,13 +1,9 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { AppLayout } from "@/components/app-layout";
 import { useDataStore } from "@/lib/data-context";
 import heroVilla from "@/imagens/home.jpg";
 
-export const Route = createFileRoute("/")({
-  component: HomePage,
-});
-
-function HomePage() {
+export function HomePage() {
   const { data, loading, error } = useDataStore();
 
   if (loading) {

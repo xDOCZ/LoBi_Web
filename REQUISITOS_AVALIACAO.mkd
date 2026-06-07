@@ -1,0 +1,50 @@
+# Critérios de Avaliação - Mapeamento no Projeto
+
+Este documento relaciona cada critério de avaliação com os arquivos/componentes responsáveis no projeto.
+
+## 1) Apresentação do website em laboratório de aula
+- Estrutura principal e identidade visual reutilizável: [src/components/app-layout.jsx](src/components/app-layout.jsx)
+- Página inicial para demonstração do produto e navegação principal: [src/pages/home-page.jsx](src/pages/home-page.jsx)
+- Animação de entrada (impacto visual na apresentação): [src/components/brand-loader.jsx](src/components/brand-loader.jsx)
+
+## 2) Implementação dos conceitos e recursos apresentados na disciplina
+- Composição da aplicação com contexto global, bootstrap e providers: [src/app-root.jsx](src/app-root.jsx)
+- CRUD reutilizável com create/update/delete e validações: [src/components/entity-crud-table.jsx](src/components/entity-crud-table.jsx)
+- Autenticação com base JSON e persistência local: [src/lib/auth-store.js](src/lib/auth-store.js)
+
+## 3) Organização do código
+- Separação por páginas e roteador: [src/pages](src/pages) e [src/react-router-app.jsx](src/react-router-app.jsx)
+- Componentes reutilizáveis: [src/components](src/components)
+- Regras visuais e tema centralizados: [src/styles.css](src/styles.css)
+- Dados em arquivos JSON versionáveis: [src/data/locacao.json](src/data/locacao.json) e [src/data/usuarios.json](src/data/usuarios.json)
+
+## 4) Usabilidade das funcionalidades
+- Fluxo de autenticação (entrar/cadastro/perfil): [src/pages/admin-page.jsx](src/pages/admin-page.jsx)
+- Validação de formulário, máscaras e mensagens de erro no CRUD: [src/components/entity-crud-table.jsx](src/components/entity-crud-table.jsx)
+- Navegação entre entidades com feedback visual: [src/components/app-layout.jsx](src/components/app-layout.jsx)
+
+## 5) Aparência geral do website
+- Tokens de cor, tipografia e tema da marca Lo&Bi: [src/styles.css](src/styles.css)
+- Layout responsivo e coerência visual entre páginas: [src/components/app-layout.jsx](src/components/app-layout.jsx)
+- Página de catálogo/listagem de imóveis com carrossel e cards: [src/pages/imoveis-page.jsx](src/pages/imoveis-page.jsx)
+
+## Observação
+Também foram adicionados comentários explicativos nos componentes principais responsáveis por esses critérios:
+- [src/components/app-layout.jsx](src/components/app-layout.jsx)
+- [src/components/entity-crud-table.jsx](src/components/entity-crud-table.jsx)
+- [src/app-root.jsx](src/app-root.jsx)
+- [src/pages/admin-page.jsx](src/pages/admin-page.jsx)
+- [src/pages/home-page.jsx](src/pages/home-page.jsx)
+
+## Principais Bibliotecas Utilizadas
+- React (`react`, `react-dom`): base da interface SPA por componentes, estado e renderizacao.
+- React Router (`react-router-dom`): roteamento de páginas e navegação da aplicação.
+- Vite (`vite`, `@vitejs/plugin-react`): servidor de desenvolvimento e build de produção.
+- Tailwind CSS (`tailwindcss`, `@tailwindcss/vite`, `tw-animate-css`): estilização utilitária, tema visual e animações.
+- Radix UI (`@radix-ui/*`): componentes de interface acessíveis e reutilizáveis.
+- Lucide React (`lucide-react`): ícones da interface.
+- Embla Carousel (`embla-carousel-react`): comportamento de carrossel utilizado na listagem de imóveis.
+- React Hook Form + Zod (`react-hook-form`, `zod`, `@hookform/resolvers`): suporte para modelagem e validação de formulários.
+- Recharts (`recharts`): gráficos e visualização de dados quando necessário.
+- Sonner (`sonner`): notificações/toasts para feedback de interação.
+- Utilitários de classe (`clsx`, `tailwind-merge`, `class-variance-authority`): composição e padronização de classes CSS.

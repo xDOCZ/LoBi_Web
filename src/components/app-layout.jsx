@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link, NavLink } from "react-router-dom";
 import { useAuth } from "@/lib/auth";
 import heroVilla from "@/imagens/home.jpg";
 
@@ -24,9 +24,6 @@ export function AppLayout({ title, subtitle, children }) {
       <header className="relative z-10 border-b border-border/60 bg-background/80 backdrop-blur">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-6 py-5">
           <Link to="/" className="flex items-center gap-2">
-            <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[var(--gold)] text-[var(--gold)]">
-              M
-            </span>
             <span className="font-display text-2xl text-[var(--cream)] md:text-[var(--olive-deep)]">
               Lo&amp;Bi
             </span>
@@ -34,17 +31,17 @@ export function AppLayout({ title, subtitle, children }) {
 
           <nav className="flex flex-wrap gap-2 text-sm">
             {navItems.map((item) => (
-              <Link
+              <NavLink
                 key={item.to}
                 to={item.to}
-                className="rounded-full border border-border/80 bg-card/70 px-3 py-1.5 transition hover:border-[var(--gold)] hover:text-[var(--gold-deep)]"
-                activeProps={{
-                  className:
-                    "rounded-full border border-[var(--gold)] bg-[var(--gold)]/10 px-3 py-1.5 text-[var(--gold-deep)]",
-                }}
+                className={({ isActive }) =>
+                  isActive
+                    ? "rounded-full border border-[var(--gold)] bg-[var(--gold)]/10 px-3 py-1.5 text-[var(--gold-deep)]"
+                    : "rounded-full border border-border/80 bg-card/70 px-3 py-1.5 transition hover:border-[var(--gold)] hover:text-[var(--gold-deep)]"
+                }
               >
                 {item.label}
-              </Link>
+              </NavLink>
             ))}
           </nav>
 

@@ -1,9 +1,71 @@
 import { useMemo, useState } from "react";
 import { useAuth } from "@/lib/auth";
 
+function onlyDigits(value) {
+  return String(value ?? "").replace(/\D/g, "");
+}
+
+function normalizePhoneDigits(value) {
+  const digits = onlyDigits(value);
+  if (digits.length <= 11) {
+    return digits;
+  }
+  return digits.slice(-11);
+}
+
+function maskPhone(value) {
+  const digits = normalizePhoneDigits(value);
+  if (!digits) {
+    return "";
+  }
+
+  const ddd = digits.slice(0, 2);
+  if (digits.length <= 2) {
+    return `(${ddd}`;
+  }
+
+  if (digits.length <= 10) {
+    const prefix = digits.slice(2, 6);
+    const suffix = digits.slice(6, 10);
+    return suffix ? `(${ddd}) ${prefix}-${suffix}` : `(${ddd}) ${prefix}`;
+  }
+
+  const prefix = digits.slice(2, 7);
+  const suffix = digits.slice(7, 11);
+  return suffix ? `(${ddd}) ${prefix}-${suffix}` : `(${ddd}) ${prefix}`;
+}
+
+function maskCnpj(value) {
+  const digits = onlyDigits(value).slice(0, 14);
+  if (!digits) {
+    return "";
+  }
+
+  let masked = digits;
+  if (digits.length > 2) masked = `${digits.slice(0, 2)}.${digits.slice(2)}`;
+  if (digits.length > 5) masked = `${masked.slice(0, 6)}.${masked.slice(6)}`;
+  if (digits.length > 8) masked = `${masked.slice(0, 10)}/${masked.slice(10)}`;
+  if (digits.length > 12) masked = `${masked.slice(0, 15)}-${masked.slice(15)}`;
+  return masked;
+}
+
+function sanitizeFieldValue(value, field) {
+  if (field.mask === "phone") {
+    return maskPhone(value);
+  }
+  if (field.mask === "cnpj") {
+    return maskCnpj(value);
+  }
+  if (field.transform === "uppercase") {
+    return String(value ?? "").toUpperCase();
+  }
+  return String(value ?? "");
+}
+
 function getInitialForm(fields, record = null) {
   return fields.reduce((acc, field) => {
-    acc[field.name] = record ? String(record[field.name] ?? "") : "";
+    const value = record ? record[field.name] ?? "" : "";
+    acc[field.name] = sanitizeFieldValue(value, field);
     return acc;
   }, {});
 }
@@ -14,6 +76,47 @@ function parseByType(value, type) {
     return Number.isNaN(parsed) ? 0 : parsed;
   }
   return value.trim();
+}
+
+function getFieldError(value, field) {
+  const textValue = String(value ?? "").trim();
+
+  if (field.required && !textValue) {
+    return `${field.label} e obrigatorio.`;
+  }
+
+  if (!textValue) {
+    return "";
+  }
+
+  if (field.type === "number") {
+    const parsed = Number(textValue);
+    if (Number.isNaN(parsed)) {
+      return field.validationMessage || `${field.label} precisa ser numerico.`;
+    }
+    if (field.min !== undefined && parsed < Number(field.min)) {
+      return field.validationMessage || `${field.label} esta abaixo do minimo permitido.`;
+    }
+    if (field.max !== undefined && parsed > Number(field.max)) {
+      return field.validationMessage || `${field.label} esta acima do maximo permitido.`;
+    }
+  }
+
+  if (field.type === "email") {
+    const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(textValue);
+    if (!isValidEmail) {
+      return field.validationMessage || "Informe um email valido.";
+    }
+  }
+
+  if (field.pattern) {
+    const regex = new RegExp(field.pattern);
+    if (!regex.test(textValue)) {
+      return field.validationMessage || `${field.label} esta em formato invalido.`;
+    }
+  }
+
+  return "";
 }
 
 export function EntityCrudTable({
@@ -29,19 +132,35 @@ export function EntityCrudTable({
   const [form, setForm] = useState(getInitialForm(fields));
   const [editingId, setEditingId] = useState(null);
   const [editForm, setEditForm] = useState(getInitialForm(fields));
+  const [validationError, setValidationError] = useState("");
 
   const headers = useMemo(() => fields.map((field) => field.label), [fields]);
+
+  const updateFormField = (name, value) => {
+    const field = fields.find((item) => item.name === name);
+    const nextValue = field ? sanitizeFieldValue(value, field) : String(value ?? "");
+    setForm((current) => ({ ...current, [name]: nextValue }));
+  };
+
+  const updateEditFormField = (name, value) => {
+    const field = fields.find((item) => item.name === name);
+    const nextValue = field ? sanitizeFieldValue(value, field) : String(value ?? "");
+    setEditForm((current) => ({ ...current, [name]: nextValue }));
+  };
 
   const handleCreate = () => {
     const payload = {};
 
     for (const field of fields) {
-      if (field.required && !String(form[field.name]).trim()) {
+      const fieldError = getFieldError(form[field.name], field);
+      if (fieldError) {
+        setValidationError(fieldError);
         return;
       }
       payload[field.name] = parseByType(form[field.name], field.type);
     }
 
+    setValidationError("");
     onCreate(payload);
     setForm(getInitialForm(fields));
   };
@@ -49,18 +168,22 @@ export function EntityCrudTable({
   const startEdit = (row) => {
     setEditingId(row.id);
     setEditForm(getInitialForm(fields, row));
+    setValidationError("");
   };
 
   const saveEdit = () => {
     const payload = {};
 
     for (const field of fields) {
-      if (field.required && !String(editForm[field.name]).trim()) {
+      const fieldError = getFieldError(editForm[field.name], field);
+      if (fieldError) {
+        setValidationError(fieldError);
         return;
       }
       payload[field.name] = parseByType(editForm[field.name], field.type);
     }
 
+    setValidationError("");
     onUpdate(editingId, payload);
     setEditingId(null);
   };
@@ -81,9 +204,8 @@ export function EntityCrudTable({
                 {field.options ? (
                   <select
                     value={form[field.name]}
-                    onChange={(event) =>
-                      setForm((current) => ({ ...current, [field.name]: event.target.value }))
-                    }
+                    required={field.required}
+                    onChange={(event) => updateFormField(field.name, event.target.value)}
                     className="w-full rounded-sm border border-border bg-card px-3 py-2 outline-none focus:border-[var(--gold)]"
                   >
                     <option value="">Selecione uma opcao</option>
@@ -96,10 +218,16 @@ export function EntityCrudTable({
                 ) : (
                   <input
                     value={form[field.name]}
-                    type={field.type === "number" ? "number" : "text"}
-                    onChange={(event) =>
-                      setForm((current) => ({ ...current, [field.name]: event.target.value }))
-                    }
+                    type={field.type || "text"}
+                    required={field.required}
+                    pattern={field.pattern}
+                    title={field.validationMessage}
+                    inputMode={field.inputMode}
+                    placeholder={field.placeholder}
+                    maxLength={field.maxLength}
+                    min={field.min}
+                    step={field.step}
+                    onChange={(event) => updateFormField(field.name, event.target.value)}
                     className="w-full rounded-sm border border-border bg-card px-3 py-2 outline-none focus:border-[var(--gold)]"
                   />
                 )}
@@ -118,6 +246,12 @@ export function EntityCrudTable({
           Acesso administrativo necessario para criar, editar e excluir registros.
         </p>
       )}
+
+      {validationError ? (
+        <p className="mb-4 rounded-sm border border-destructive/40 bg-destructive/10 p-3 text-sm text-destructive">
+          {validationError}
+        </p>
+      ) : null}
 
       <div className="overflow-auto">
         <table className="w-full min-w-[760px] border-collapse text-sm">
@@ -149,12 +283,8 @@ export function EntityCrudTable({
                       field.options ? (
                         <select
                           value={editForm[field.name]}
-                          onChange={(event) =>
-                            setEditForm((current) => ({
-                              ...current,
-                              [field.name]: event.target.value,
-                            }))
-                          }
+                          required={field.required}
+                          onChange={(event) => updateEditFormField(field.name, event.target.value)}
                           className="w-full rounded-sm border border-border bg-background px-2 py-1 outline-none focus:border-[var(--gold)]"
                         >
                           <option value="">Selecione uma opcao</option>
@@ -167,13 +297,16 @@ export function EntityCrudTable({
                       ) : (
                         <input
                           value={editForm[field.name]}
-                          type={field.type === "number" ? "number" : "text"}
-                          onChange={(event) =>
-                            setEditForm((current) => ({
-                              ...current,
-                              [field.name]: event.target.value,
-                            }))
-                          }
+                          type={field.type || "text"}
+                          required={field.required}
+                          pattern={field.pattern}
+                          title={field.validationMessage}
+                          inputMode={field.inputMode}
+                          placeholder={field.placeholder}
+                          maxLength={field.maxLength}
+                          min={field.min}
+                          step={field.step}
+                          onChange={(event) => updateEditFormField(field.name, event.target.value)}
                           className="w-full rounded-sm border border-border bg-background px-2 py-1 outline-none focus:border-[var(--gold)]"
                         />
                       )

@@ -1,13 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { AppLayout } from "@/components/app-layout";
 import { EntityCrudTable } from "@/components/entity-crud-table";
 import { useDataStore } from "@/lib/data-context";
 
-export const Route = createFileRoute("/propostas")({
-  component: PropostasPage,
-});
-
-function PropostasPage() {
+export function PropostasPage() {
   const { data, loading, error, createRecord, updateRecord, deleteRecord } = useDataStore();
 
   if (loading) {
@@ -51,10 +46,36 @@ function PropostasPage() {
             required: true,
             options: imovelOptions,
           },
-          { name: "cliente", label: "Cliente", required: true },
-          { name: "valorOferta", label: "Valor da oferta", type: "number", required: true },
-          { name: "status", label: "Status", required: true },
-          { name: "dataContato", label: "Data de contato", required: true },
+          {
+            name: "cliente",
+            label: "Cliente",
+            required: true,
+            pattern: "^[A-Za-zÀ-ÿ\\s'-]{3,}$",
+            validationMessage: "Informe o nome do cliente com pelo menos 3 caracteres.",
+          },
+          {
+            name: "valorOferta",
+            label: "Valor da oferta",
+            type: "number",
+            required: true,
+            min: 1,
+            step: 1,
+            validationMessage: "Informe um valor numerico maior que zero.",
+          },
+          {
+            name: "status",
+            label: "Status",
+            required: true,
+            pattern: "^[A-Za-zÀ-ÿ\\s]{2,}$",
+            validationMessage: "Informe um status valido.",
+          },
+          {
+            name: "dataContato",
+            label: "Data de contato",
+            type: "date",
+            required: true,
+            validationMessage: "Informe uma data valida.",
+          },
           {
             name: "corretorId",
             label: "Corretor",

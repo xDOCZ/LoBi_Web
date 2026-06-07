@@ -97,3 +97,121 @@
     letter-spacing: -0.01em;
   }
 }
+
+.loader-wrap {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 15% 15%, oklch(0.72 0.12 75 / 0.2), transparent 45%),
+    radial-gradient(circle at 85% 20%, oklch(0.42 0.06 105 / 0.18), transparent 40%),
+    linear-gradient(180deg, oklch(0.2 0.03 70), oklch(0.14 0.02 70));
+  color: var(--cream);
+  opacity: 1;
+  transition: opacity 520ms ease, filter 520ms ease;
+}
+
+.loader-wrap.loader-exit {
+  opacity: 0;
+  filter: blur(6px);
+  pointer-events: none;
+}
+
+.loader-stage {
+  position: relative;
+  width: min(92vw, 920px);
+  min-height: 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.loader-word {
+  display: flex;
+  align-items: baseline;
+  white-space: nowrap;
+  font-family: var(--font-display);
+  font-size: clamp(2.1rem, 7vw, 4.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.015em;
+  color: oklch(0.95 0.02 85);
+  text-shadow: 0 10px 40px oklch(0.14 0.03 70 / 0.45);
+}
+
+.loader-accent {
+  color: var(--gold);
+  text-shadow: 0 0 26px oklch(0.72 0.12 75 / 0.35);
+}
+
+.loader-letters {
+  display: inline-flex;
+  overflow: hidden;
+}
+
+.loader-char {
+  display: inline-block;
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  vertical-align: bottom;
+  animation-duration: 460ms;
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(0.25, 1, 0.5, 1);
+  animation-delay: calc(var(--loader-char-index) * 46ms);
+}
+
+.loader-word.run .loader-char {
+  animation-name: loader-letter-born;
+}
+
+.loader-caption {
+  text-align: center;
+  font-size: 0.8rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: oklch(0.88 0.03 80 / 0.8);
+}
+
+.loader-ambient {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(42px);
+  pointer-events: none;
+}
+
+.loader-ambient-left {
+  width: 34vw;
+  height: 34vw;
+  left: -9vw;
+  top: 18vh;
+  background: oklch(0.72 0.12 75 / 0.22);
+}
+
+.loader-ambient-right {
+  width: 30vw;
+  height: 30vw;
+  right: -7vw;
+  bottom: 12vh;
+  background: oklch(0.42 0.06 105 / 0.2);
+}
+
+@keyframes loader-letter-born {
+  0% {
+    max-width: 0;
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  100% {
+    max-width: 1.6ch;
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

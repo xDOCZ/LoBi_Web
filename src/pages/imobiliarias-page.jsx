@@ -1,13 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { AppLayout } from "@/components/app-layout";
 import { EntityCrudTable } from "@/components/entity-crud-table";
 import { useDataStore } from "@/lib/data-context";
 
-export const Route = createFileRoute("/imobiliarias")({
-  component: ImobiliariasPage,
-});
-
-function ImobiliariasPage() {
+export function ImobiliariasPage() {
   const { data, loading, error, createRecord, updateRecord, deleteRecord } = useDataStore();
 
   if (loading) {
@@ -40,11 +35,49 @@ function ImobiliariasPage() {
         description="Mantenha a base de imobiliarias parceiras sempre atualizada."
         rows={data.imobiliarias}
         fields={[
-          { name: "nome", label: "Nome", required: true },
-          { name: "cnpj", label: "CNPJ", required: true },
-          { name: "cidade", label: "Cidade", required: true },
-          { name: "telefone", label: "Telefone", required: true },
-          { name: "email", label: "Email", required: true },
+          {
+            name: "nome",
+            label: "Nome",
+            required: true,
+            pattern: "^[A-Za-zÀ-ÿ0-9\\s&.'-]{3,}$",
+            validationMessage: "Informe o nome da imobiliaria com pelo menos 3 caracteres.",
+          },
+          {
+            name: "cnpj",
+            label: "CNPJ",
+            required: true,
+            mask: "cnpj",
+            inputMode: "numeric",
+            pattern: "^[0-9]{2}\\.[0-9]{3}\\.[0-9]{3}/[0-9]{4}-[0-9]{2}$",
+            validationMessage: "Use o formato 00.000.000/0000-00.",
+            placeholder: "12.345.678/0001-99",
+            maxLength: 18,
+          },
+          {
+            name: "cidade",
+            label: "Cidade",
+            required: true,
+            pattern: "^[A-Za-zÀ-ÿ\\s'-]{2,}$",
+            validationMessage: "Informe uma cidade valida.",
+          },
+          {
+            name: "telefone",
+            label: "Telefone",
+            required: true,
+            mask: "phone",
+            inputMode: "numeric",
+            pattern: "^\\([0-9]{2}\\)\\s[0-9]{4,5}-[0-9]{4}$",
+            validationMessage: "Use 10 ou 11 digitos. Ex.: (11) 98888-7777.",
+            placeholder: "(11) 98888-7777",
+            maxLength: 15,
+          },
+          {
+            name: "email",
+            label: "Email",
+            type: "email",
+            required: true,
+            validationMessage: "Informe um email valido.",
+          },
         ]}
         onCreate={(record) => createRecord("imobiliarias", record)}
         onUpdate={(id, changes) => updateRecord("imobiliarias", id, changes)}

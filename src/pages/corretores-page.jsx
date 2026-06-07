@@ -1,13 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { AppLayout } from "@/components/app-layout";
 import { EntityCrudTable } from "@/components/entity-crud-table";
 import { useDataStore } from "@/lib/data-context";
 
-export const Route = createFileRoute("/agentes")({
-  component: CorretoresPage,
-});
-
-function CorretoresPage() {
+export function CorretoresPage() {
   const { data, loading, error, createRecord, updateRecord, deleteRecord } = useDataStore();
 
   if (loading) {
@@ -50,10 +45,41 @@ function CorretoresPage() {
         description="Gerencie o time de corretores responsavel pelo atendimento consultivo."
         rows={data.corretores}
         fields={[
-          { name: "nome", label: "Nome", required: true },
-          { name: "creci", label: "CRECI", required: true },
-          { name: "email", label: "Email", required: true },
-          { name: "telefone", label: "Telefone", required: true },
+          {
+            name: "nome",
+            label: "Nome",
+            required: true,
+            pattern: "^[A-Za-zÀ-ÿ\\s'-]{3,}$",
+            validationMessage: "Informe um nome valido (somente letras e espacos).",
+          },
+          {
+            name: "creci",
+            label: "CRECI",
+            required: true,
+            transform: "uppercase",
+            pattern: "^CRECI-[A-Z]{2}\\s[0-9]{4,10}$",
+            validationMessage: "Use o formato CRECI-UF 123456.",
+            placeholder: "CRECI-SP 123456",
+            maxLength: 20,
+          },
+          {
+            name: "email",
+            label: "Email",
+            type: "email",
+            required: true,
+            validationMessage: "Informe um email valido.",
+          },
+          {
+            name: "telefone",
+            label: "Telefone",
+            required: true,
+            mask: "phone",
+            inputMode: "numeric",
+            pattern: "^\\([0-9]{2}\\)\\s[0-9]{4,5}-[0-9]{4}$",
+            validationMessage: "Use 10 ou 11 digitos. Ex.: (11) 98888-7777.",
+            placeholder: "(11) 98888-7777",
+            maxLength: 15,
+          },
           {
             name: "imobiliariaId",
             label: "Imobiliaria",
@@ -61,7 +87,13 @@ function CorretoresPage() {
             required: true,
             options: imobiliariaOptions,
           },
-          { name: "especialidade", label: "Especialidade", required: true },
+          {
+            name: "especialidade",
+            label: "Especialidade",
+            required: true,
+            pattern: "^[A-Za-zÀ-ÿ0-9\\s'-]{3,}$",
+            validationMessage: "Informe a especialidade com pelo menos 3 caracteres.",
+          },
         ]}
         onCreate={(record) => createRecord("corretores", record)}
         onUpdate={(id, changes) => updateRecord("corretores", id, changes)}
