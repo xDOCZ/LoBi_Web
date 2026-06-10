@@ -24,7 +24,35 @@ export function AppLayout({ title, subtitle, children }) {
       <header className="relative z-10 border-b border-border/60 bg-background/80 backdrop-blur">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-6 py-5">
           <Link to="/" className="flex items-center gap-2">
-            <span className="font-display text-2xl text-[var(--cream)] md:text-[var(--olive-deep)]">
+            <svg
+              width="40"
+              height="40"
+              viewBox="0 0 40 40"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#B8943D" />
+                  <stop offset="100%" stopColor="#6B7A3D" />
+                </linearGradient>
+              </defs>
+              <rect width="40" height="40" rx="6" fill="url(#logoGradient)" opacity="0.15" />
+              <rect width="40" height="40" rx="6" fill="none" stroke="url(#logoGradient)" strokeWidth="1.5" opacity="0.3" />
+              <text
+                x="20"
+                y="27"
+                fontSize="18"
+                fontWeight="700"
+                textAnchor="middle"
+                fill="url(#logoGradient)"
+                fontFamily="Instrument Serif, Georgia, serif"
+                letterSpacing="-0.02em"
+              >
+                LB
+              </text>
+            </svg>
+            <span className="font-display text-lg font-semibold text-[var(--cream)] md:text-[var(--olive-deep)]">
               Lo&amp;Bi
             </span>
           </Link>

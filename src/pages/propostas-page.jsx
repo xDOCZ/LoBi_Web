@@ -10,7 +10,7 @@ export function PropostasPage() {
   }
 
   if (error || !data) {
-    return <AppLayout title="Erro" subtitle={error || "Dados indisponiveis"} />;
+    return <AppLayout title="Erro" subtitle={error || "Dados indisponíveis"} />;
   }
 
   const imovelOptions = data.imoveis.map((item) => ({
@@ -26,17 +26,16 @@ export function PropostasPage() {
   return (
     <AppLayout
       title="Propostas"
-      subtitle="Etapa comercial que conecta cliente, imovel, corretor e status da negociacao."
+      subtitle="Etapa comercial que conecta cliente, imóvel, corretor e status da negociação."
     >
       <section className="mb-6 rounded-sm border border-border bg-card p-5">
         <p className="text-sm text-muted-foreground">
-          Acompanhe o fluxo de propostas em locacao e venda com historico de contato e valor ofertado.
+          Acompanhe o fluxo de propostas em locação e venda com histórico de contato e valor ofertado.
         </p>
       </section>
 
       <EntityCrudTable
-        title="CRUD de Propostas"
-        description="Gerencie propostas comerciais e atualize o andamento de cada negociacao."
+        title="Cadastro de Propostas"
         rows={data.propostas}
         fields={[
           {
@@ -67,14 +66,14 @@ export function PropostasPage() {
             label: "Status",
             required: true,
             pattern: "^[A-Za-zÀ-ÿ\\s]{2,}$",
-            validationMessage: "Informe um status valido.",
+            validationMessage: "Informe um status válido.",
           },
           {
             name: "dataContato",
             label: "Data de contato",
             type: "date",
             required: true,
-            validationMessage: "Informe uma data valida.",
+            validationMessage: "Informe uma data válida.",
           },
           {
             name: "corretorId",

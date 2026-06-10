@@ -15,7 +15,7 @@ export function ImobiliariasPage() {
 
   return (
     <AppLayout
-      title="Imobiliarias"
+      title="Imobiliárias"
       subtitle="Empresas parceiras com estrutura comercial, contato e cobertura regional."
     >
       <section className="mb-6 grid gap-4 md:grid-cols-3">
@@ -31,8 +31,7 @@ export function ImobiliariasPage() {
       </section>
 
       <EntityCrudTable
-        title="CRUD de Imobiliarias"
-        description="Mantenha a base de imobiliarias parceiras sempre atualizada."
+        title="Cadastro de Imobiliárias"
         rows={data.imobiliarias}
         fields={[
           {
@@ -58,7 +57,7 @@ export function ImobiliariasPage() {
             label: "Cidade",
             required: true,
             pattern: "^[A-Za-zÀ-ÿ\\s'-]{2,}$",
-            validationMessage: "Informe uma cidade valida.",
+            validationMessage: "Informe uma cidade válida.",
           },
           {
             name: "telefone",
@@ -76,7 +75,7 @@ export function ImobiliariasPage() {
             label: "Email",
             type: "email",
             required: true,
-            validationMessage: "Informe um email valido.",
+            validationMessage: "Informe um email válido.",
           },
         ]}
         onCreate={(record) => createRecord("imobiliarias", record)}

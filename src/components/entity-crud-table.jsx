@@ -82,7 +82,7 @@ function getFieldError(value, field) {
   const textValue = String(value ?? "").trim();
 
   if (field.required && !textValue) {
-    return `${field.label} e obrigatorio.`;
+    return `${field.label} é obrigatório.`;
   }
 
   if (!textValue) {
@@ -92,27 +92,27 @@ function getFieldError(value, field) {
   if (field.type === "number") {
     const parsed = Number(textValue);
     if (Number.isNaN(parsed)) {
-      return field.validationMessage || `${field.label} precisa ser numerico.`;
+      return field.validationMessage || `${field.label} precisa ser numérico.`;
     }
     if (field.min !== undefined && parsed < Number(field.min)) {
-      return field.validationMessage || `${field.label} esta abaixo do minimo permitido.`;
+      return field.validationMessage || `${field.label} está abaixo do mínimo permitido.`;
     }
     if (field.max !== undefined && parsed > Number(field.max)) {
-      return field.validationMessage || `${field.label} esta acima do maximo permitido.`;
+      return field.validationMessage || `${field.label} está acima do máximo permitido.`;
     }
   }
 
   if (field.type === "email") {
     const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(textValue);
     if (!isValidEmail) {
-      return field.validationMessage || "Informe um email valido.";
+      return field.validationMessage || "Informe um email válido.";
     }
   }
 
   if (field.pattern) {
     const regex = new RegExp(field.pattern);
     if (!regex.test(textValue)) {
-      return field.validationMessage || `${field.label} esta em formato invalido.`;
+      return field.validationMessage || `${field.label} está em formato inválido.`;
     }
   }
 
@@ -241,11 +241,7 @@ export function EntityCrudTable({
             </button>
           </div>
         </div>
-      ) : (
-        <p className="mb-4 rounded-sm border border-border bg-muted p-3 text-sm text-muted-foreground">
-          Acesso administrativo necessario para criar, editar e excluir registros.
-        </p>
-      )}
+      ) : null}
 
       {validationError ? (
         <p className="mb-4 rounded-sm border border-destructive/40 bg-destructive/10 p-3 text-sm text-destructive">
@@ -253,8 +249,9 @@ export function EntityCrudTable({
         </p>
       ) : null}
 
-      <div className="overflow-auto">
-        <table className="w-full min-w-[760px] border-collapse text-sm">
+      {isAdmin ? (
+        <div className="overflow-auto">
+          <table className="w-full min-w-[760px] border-collapse text-sm">
           <thead className="bg-muted text-left text-[var(--olive-deep)]">
             <tr>
               <th className="px-3 py-2">ID</th>
@@ -356,7 +353,12 @@ export function EntityCrudTable({
             ))}
           </tbody>
         </table>
-      </div>
+        </div>
+      ) : (
+        <p className="rounded-sm border border-border bg-muted p-3 text-sm text-muted-foreground">
+          Acesso administrativo necessário para visualizar a tabela de registros.
+        </p>
+      )}
     </section>
   );
 }

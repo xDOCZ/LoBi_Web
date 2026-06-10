@@ -2,6 +2,29 @@ import { AppLayout } from "@/components/app-layout";
 import { EntityCrudTable } from "@/components/entity-crud-table";
 import { useDataStore } from "@/lib/data-context";
 
+function Avatar({ nome }) {
+  const initials = nome
+    .split(" ")
+    .slice(0, 2)
+    .map((word) => word[0])
+    .join("")
+    .toUpperCase();
+
+  const colors = [
+    "bg-[var(--gold)]/20 text-[var(--gold-deep)]",
+    "bg-[var(--olive)]/20 text-[var(--olive-deep)]",
+    "bg-[var(--peach)]/20 text-[var(--olive-deep)]",
+  ];
+
+  const colorIndex = initials.charCodeAt(0) % colors.length;
+
+  return (
+    <div className={`${colors[colorIndex]} flex h-20 w-20 items-center justify-center rounded-full`}>
+      <span className="font-display text-2xl font-semibold">{initials}</span>
+    </div>
+  );
+}
+
 export function CorretoresPage() {
   const { data, loading, error, createRecord, updateRecord, deleteRecord } = useDataStore();
 
@@ -21,28 +44,31 @@ export function CorretoresPage() {
   return (
     <AppLayout
       title="Corretores"
-      subtitle="Equipe de especialistas com CRECI, contato direto e vinculacao por imobiliaria."
+      subtitle="Equipe de especialistas com CRECI, contato direto e vinculação por imobiliária."
     >
       <section className="mb-6 grid gap-4 md:grid-cols-3">
         {data.corretores.map((corretor) => {
           const imobiliaria = data.imobiliarias.find((item) => item.id === corretor.imobiliariaId);
           return (
             <article key={corretor.id} className="rounded-sm border border-border bg-card p-4">
-              <h2 className="font-display text-2xl text-[var(--olive-deep)]">{corretor.nome}</h2>
-              <p className="mt-2 text-sm text-muted-foreground">{corretor.creci}</p>
-              <p className="text-sm">{corretor.email}</p>
-              <p className="text-sm">{corretor.telefone}</p>
-              <p className="mt-2 text-sm text-muted-foreground">
-                Imobiliaria: {imobiliaria ? imobiliaria.nome : "Nao vinculada"}
-              </p>
+              <div className="mb-4 flex justify-center">
+                <Avatar nome={corretor.nome} />
+              </div>
+              <h2 className="text-center font-display text-2xl text-[var(--olive-deep)]">{corretor.nome}</h2>
+              <p className="mt-2 text-center text-sm font-medium text-[var(--gold-deep)]">{corretor.especialidade}</p>
+              <p className="mt-3 text-center text-sm text-muted-foreground">{corretor.creci}</p>
+              <div className="mt-4 space-y-2 border-t border-border pt-4 text-sm">
+                <p><span className="text-muted-foreground">Email:</span> {corretor.email}</p>
+                <p><span className="text-muted-foreground">Tel:</span> {corretor.telefone}</p>
+                <p><span className="text-muted-foreground">Imobiliária:</span> {imobiliaria ? imobiliaria.nome : "Não vinculada"}</p>
+              </div>
             </article>
           );
         })}
       </section>
 
       <EntityCrudTable
-        title="CRUD de Corretores"
-        description="Gerencie o time de corretores responsavel pelo atendimento consultivo."
+        title="Cadastro de Corretores"
         rows={data.corretores}
         fields={[
           {
@@ -50,7 +76,7 @@ export function CorretoresPage() {
             label: "Nome",
             required: true,
             pattern: "^[A-Za-zÀ-ÿ\\s'-]{3,}$",
-            validationMessage: "Informe um nome valido (somente letras e espacos).",
+            validationMessage: "Informe um nome válido (somente letras e espaços).",
           },
           {
             name: "creci",
@@ -67,7 +93,7 @@ export function CorretoresPage() {
             label: "Email",
             type: "email",
             required: true,
-            validationMessage: "Informe um email valido.",
+            validationMessage: "Informe um email válido.",
           },
           {
             name: "telefone",
@@ -95,7 +121,9 @@ export function CorretoresPage() {
             validationMessage: "Informe a especialidade com pelo menos 3 caracteres.",
           },
         ]}
-        onCreate={(record) => createRecord("corretores", record)}
+        onCreate={(record) => {
+          createRecord("corretores", record);
+        }}
         onUpdate={(id, changes) => updateRecord("corretores", id, changes)}
         onDelete={(id) => deleteRecord("corretores", id)}
       />

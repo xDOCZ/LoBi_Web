@@ -40,35 +40,35 @@ export function ImoveisPage() {
       label: "Titulo",
       required: true,
       pattern: "^[A-Za-zÀ-ÿ0-9\\s.,'-]{3,}$",
-      validationMessage: "Informe um titulo valido com pelo menos 3 caracteres.",
+      validationMessage: "Informe um título válido com pelo menos 3 caracteres.",
     },
     {
       name: "tipo",
       label: "Tipo",
       required: true,
       pattern: "^[A-Za-zÀ-ÿ\\s]{2,}$",
-      validationMessage: "Informe um tipo valido.",
+      validationMessage: "Informe um tipo válido.",
     },
     {
       name: "operacao",
       label: "Operacao",
       required: true,
       pattern: "^[A-Za-zÀ-ÿ\\s]{2,}$",
-      validationMessage: "Informe a operacao (ex.: Venda ou Locacao).",
+      validationMessage: "Informe a operação (ex.: Venda ou Locação).",
     },
     {
       name: "bairro",
       label: "Bairro",
       required: true,
       pattern: "^[A-Za-zÀ-ÿ0-9\\s'-]{2,}$",
-      validationMessage: "Informe um bairro valido.",
+      validationMessage: "Informe um bairro válido.",
     },
     {
       name: "cidade",
       label: "Cidade",
       required: true,
       pattern: "^[A-Za-zÀ-ÿ\\s'-]{2,}$",
-      validationMessage: "Informe uma cidade valida.",
+      validationMessage: "Informe uma cidade válida.",
     },
     {
       name: "valor",
@@ -77,7 +77,7 @@ export function ImoveisPage() {
       required: true,
       min: 1,
       step: 1,
-      validationMessage: "Informe um valor numerico maior que zero.",
+      validationMessage: "Informe um valor numérico maior que zero.",
     },
     {
       name: "quartos",
@@ -136,17 +136,13 @@ export function ImoveisPage() {
   ];
 
   const handleCreateImovel = (record) => {
-    const nextId =
-      data.imoveis.length > 0 ? Math.max(...data.imoveis.map((item) => item.id)) + 1 : 1;
-
     createRecord("imoveis", record);
-    navigate(`/imoveis/${nextId}`);
   };
 
   return (
     <AppLayout
-      title="Imoveis"
-      subtitle="Colecao premium com imagens locais e gestao completa da entidade Imovel."
+      title="Imóveis"
+      subtitle="Veja as opções disponíveis para locação ou compra."
     >
       <section className="mb-6 grid gap-4 md:grid-cols-2">
         {data.imoveis.map((item) => {
@@ -248,8 +244,7 @@ export function ImoveisPage() {
       </section>
 
       <EntityCrudTable
-        title="CRUD de Imoveis"
-        description="Crie, ajuste e remova registros da colecao de imoveis com agilidade."
+        title="Imóveis Cadastrados"
         rows={data.imoveis}
         fields={fields}
         onCreate={handleCreateImovel}

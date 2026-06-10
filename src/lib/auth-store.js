@@ -115,7 +115,7 @@ export function registerAccount(payload) {
   const confirmPassword = String(payload?.confirmPassword ?? "");
 
   if (!nome || !username || !email || !password || !confirmPassword) {
-    return { ok: false, message: "Preencha todos os campos obrigatorios." };
+    return { ok: false, message: "Preencha todos os campos obrigatórios." };
   }
 
   if (nome.length < 3) {
@@ -125,23 +125,23 @@ export function registerAccount(payload) {
   if (!validateUsername(username)) {
     return {
       ok: false,
-      message: "Usuario invalido. Use 3-20 caracteres com letras, numeros, ponto, _ ou -.",
+      message: "Usuário inválido. Use 3-20 caracteres com letras, números, ponto, _ ou -.",
     };
   }
 
   if (!validateEmail(email)) {
-    return { ok: false, message: "Email invalido." };
+    return { ok: false, message: "Email inválido." };
   }
 
   if (!validatePassword(password)) {
     return {
       ok: false,
-      message: "A senha deve ter ao menos 8 caracteres, incluindo letras e numeros.",
+      message: "A senha deve ter ao menos 8 caracteres, incluindo letras e números.",
     };
   }
 
   if (password !== confirmPassword) {
-    return { ok: false, message: "A confirmacao da senha nao confere." };
+    return { ok: false, message: "A confirmação da senha não confere." };
   }
 
   const users = readUsersFromStorage() || [];
@@ -149,12 +149,12 @@ export function registerAccount(payload) {
     (item) => normalizeIdentifier(item.username) === normalizeIdentifier(username),
   );
   if (usernameInUse) {
-    return { ok: false, message: "Este usuario ja esta em uso." };
+    return { ok: false, message: "Este usuário já está em uso." };
   }
 
   const emailInUse = users.some((item) => normalizeIdentifier(item.email) === normalizeIdentifier(email));
   if (emailInUse) {
-    return { ok: false, message: "Este email ja esta cadastrado." };
+    return { ok: false, message: "Este email já está cadastrado." };
   }
 
   const nextId = users.length > 0 ? Math.max(...users.map((item) => Number(item.id) || 0)) + 1 : 1;
@@ -188,7 +188,7 @@ export function loginAccount(identifier, password) {
   const normalizedPassword = String(password ?? "").trim();
 
   if (!normalizedIdentifier || !normalizedPassword) {
-    return { ok: false, message: "Informe usuario/email e senha." };
+    return { ok: false, message: "Informe usuário/email e senha." };
   }
 
   const users = readUsersFromStorage() || [];
@@ -200,7 +200,7 @@ export function loginAccount(identifier, password) {
   });
 
   if (!match) {
-    return { ok: false, message: "Usuario/email ou senha invalidos." };
+    return { ok: false, message: "Usuário/email ou senha inválidos." };
   }
 
   if (!match.active) {

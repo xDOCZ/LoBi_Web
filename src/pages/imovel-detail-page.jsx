@@ -8,7 +8,7 @@ export function ImovelDetailPage() {
   const { data, loading, error } = useDataStore();
 
   if (loading) {
-    return <AppLayout title="Carregando detalhes do imovel..." />;
+    return <AppLayout title="Carregando detalhes do imóvel..." />;
   }
 
   if (error || !data) {
@@ -20,12 +20,12 @@ export function ImovelDetailPage() {
 
   if (!imovel) {
     return (
-      <AppLayout title="Imovel nao encontrado" subtitle="O registro solicitado nao existe na base atual.">
+      <AppLayout title="Imóvel nao encontrado" subtitle="O registro solicitado não existe na base atual.">
         <Link
           to="/imoveis"
           className="inline-flex rounded-sm border border-border px-4 py-2 text-sm hover:bg-muted"
         >
-          Voltar para lista de imoveis
+          Voltar para lista de imóveis
         </Link>
       </AppLayout>
     );
@@ -48,21 +48,21 @@ export function ImovelDetailPage() {
         <div className="grid gap-4 p-6 md:grid-cols-2">
           <div className="space-y-2">
             <p className="text-sm text-muted-foreground">Tipo: {imovel.tipo}</p>
-            <p className="text-sm text-muted-foreground">Operacao: {imovel.operacao}</p>
+            <p className="text-sm text-muted-foreground">Operação: {imovel.operacao}</p>
             <p className="text-sm text-muted-foreground">Local: {imovel.bairro}, {imovel.cidade}</p>
-            <p className="text-sm text-muted-foreground">Area: {imovel.area} m2</p>
+            <p className="text-sm text-muted-foreground">Área: {imovel.area} m2</p>
             <p className="text-sm text-muted-foreground">Quartos: {imovel.quartos}</p>
             <p className="text-sm text-muted-foreground">Banheiros: {imovel.banheiros}</p>
             <p className="text-lg font-semibold">R$ {Number(imovel.valor).toLocaleString("pt-BR")}</p>
           </div>
           <div className="space-y-2">
             <p className="text-sm text-muted-foreground">
-              Imobiliaria: {imobiliaria ? imobiliaria.nome : "Nao vinculada"}
+              Imobiliária: {imobiliaria ? imobiliaria.nome : "Não vinculada"}
             </p>
             <p className="text-sm text-muted-foreground">
               Corretor: {corretor ? corretor.nome : "Nao vinculado"}
             </p>
-            <p className="text-sm text-muted-foreground">Descricao:</p>
+            <p className="text-sm text-muted-foreground">Descrição:</p>
             <p className="text-sm">{imovel.descricao}</p>
           </div>
         </div>
@@ -73,7 +73,7 @@ export function ImovelDetailPage() {
           to="/imoveis"
           className="inline-flex rounded-sm border border-border px-4 py-2 text-sm hover:bg-muted"
         >
-          Voltar para lista de imoveis
+          Voltar para lista de imóveis
         </Link>
       </div>
     </AppLayout>

@@ -43,22 +43,22 @@ export function AdminPage() {
   return (
     <AppLayout
       title="Painel Administrativo"
-      subtitle="Acesso restrito para habilitar criacao, edicao e exclusao em todas as entidades do dominio."
+      subtitle="Acesso restrito para habilitar criação, edição e exclusão em todas as entidades do domínio."
     >
       <section className="rounded-sm border border-border bg-card p-5">
         {authLoading ? (
-          <p className="text-sm text-muted-foreground">Carregando autenticacao...</p>
+          <p className="text-sm text-muted-foreground">Carregando autenticação...</p>
         ) : isAdmin ? (
           <div className="space-y-4">
             <p className="text-sm text-muted-foreground">
-              Sessao administrativa ativa para {currentUser?.nome || currentUser?.username}.
+              Sessão administrativa ativa para {currentUser?.nome || currentUser?.username}.
             </p>
             <div className="flex flex-wrap gap-2">
               <button
                 onClick={logout}
                 className="rounded-sm border border-border px-4 py-2 text-sm hover:bg-muted"
               >
-                Sair da area admin
+                Sair da área admin
               </button>
               <button
                 onClick={async () => {
@@ -89,7 +89,7 @@ export function AdminPage() {
               </button>
             </div>
             <div className="text-sm text-muted-foreground">
-              <p>Gestao de entidades:</p>
+              <p>Gestão de entidades:</p>
               <p className="mt-2">
                 <Link to="/imoveis" className="underline">
                   Ir para CRUD de Imoveis
@@ -115,7 +115,7 @@ export function AdminPage() {
               Conta autenticada: <strong>{currentUser?.nome}</strong> ({currentUser?.email}).
             </p>
             <p className="text-sm text-muted-foreground">
-              Este painel requer permissao administrativa. Sua conta atual possui perfil de usuario comum.
+              Este painel requer permissão administrativa. Sua conta atual possui perfil de usuário comum.
             </p>
             <button
               onClick={logout}
@@ -154,7 +154,7 @@ export function AdminPage() {
             {authMode === "login" ? (
               <form onSubmit={handleLogin} className="grid gap-3">
                 <label className="text-sm">
-                  <span className="mb-1 block text-muted-foreground">Usuario ou email</span>
+                  <span className="mb-1 block text-muted-foreground">Usuário ou email</span>
                   <input
                     value={identifier}
                     onChange={(event) => setIdentifier(event.target.value)}
@@ -194,14 +194,14 @@ export function AdminPage() {
                   />
                 </label>
                 <label className="text-sm">
-                  <span className="mb-1 block text-muted-foreground">Usuario</span>
+                  <span className="mb-1 block text-muted-foreground">Usuário</span>
                   <input
                     value={registerForm.username}
                     onChange={(event) =>
                       setRegisterForm((current) => ({ ...current, username: event.target.value }))
                     }
                     className="w-full rounded-sm border border-border bg-background px-3 py-2"
-                    placeholder="somente letras, numeros, ., _ e -"
+                    placeholder="somente letras, números, ., _ e -"
                   />
                 </label>
                 <label className="text-sm">
@@ -224,11 +224,11 @@ export function AdminPage() {
                       setRegisterForm((current) => ({ ...current, password: event.target.value }))
                     }
                     className="w-full rounded-sm border border-border bg-background px-3 py-2"
-                    placeholder="Minimo 8 caracteres com letras e numeros"
+                    placeholder="Mínimo 8 caracteres com letras e números"
                   />
                 </label>
                 <label className="text-sm">
-                  <span className="mb-1 block text-muted-foreground">Confirmacao da senha</span>
+                  <span className="mb-1 block text-muted-foreground">Confirmação da senha</span>
                   <input
                     type="password"
                     value={registerForm.confirmPassword}
