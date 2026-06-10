@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
+
+// Animação do carregamento do site
 function AnimatedLetters({ text, className, start = 0, onDone }) {
   const length = text.length;
 
@@ -69,17 +71,17 @@ export function BrandLoader({ visible, minimumDone, onExitDone }) {
       <div className="loader-stage">
         <div className={`loader-word ${phase === 1 ? "run" : ""}`}>
           <span className="loader-accent lo-anchor">Lo</span>
-          <AnimatedLetters text="cacao " className="loader-letters lo-tail" start={0} />
-          <AnimatedLetters text="imo" className="loader-letters bi-left" start={6} />
+          <AnimatedLetters text="cação " className="loader-letters lo-tail" start={0} />
+          <AnimatedLetters text="Imo" className="loader-letters bi-left" start={6} />
           <span className="loader-accent bi-anchor">Bi</span>
           <AnimatedLetters
-            text="liaria"
+            text="liária"
             className="loader-letters bi-right"
             start={9}
             onDone={handleLettersDone}
           />
         </div>
-        <p className="loader-caption">Realizando sonhos com curadoria premium</p>
+        <p className="loader-caption">Realizando sonhos com qualidade e excelência</p>
       </div>
     </div>
   );

@@ -4,10 +4,10 @@ import heroVilla from "@/imagens/home.jpg";
 
 const navItems = [
   { to: "/", label: "Home" },
-  { to: "/imoveis", label: "Imoveis" },
+  { to: "/imoveis", label: "Imóveis" },
   { to: "/agentes", label: "Corretores" },
-  { to: "/imobiliarias", label: "Imobiliarias" },
-  { to: "/propostas", label: "Negociacoes" },
+  { to: "/imobiliarias", label: "Imobiliárias" },
+  { to: "/propostas", label: "Negociações" },
   { to: "/admin", label: "Painel" },
 ];
 

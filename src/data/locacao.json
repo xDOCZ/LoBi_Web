@@ -33,7 +33,7 @@
       "email": "marina@lobi.com",
       "telefone": "+55 11 98888-1111",
       "imobiliariaId": 1,
-      "especialidade": "Alto padrao"
+      "especialidade": "Alto padrão"
     },
     {
       "id": 2,
@@ -42,7 +42,7 @@
       "email": "eduardo@lobi.com",
       "telefone": "+55 21 97777-2222",
       "imobiliariaId": 2,
-      "especialidade": "Locacao corporativa"
+      "especialidade": "Locação corporativa"
     },
     {
       "id": 3,
@@ -51,17 +51,17 @@
       "email": "sofia@lobi.com",
       "telefone": "+55 71 96666-3333",
       "imobiliariaId": 3,
-      "especialidade": "Imoveis de temporada"
+      "especialidade": "Imóveis de temporada"
     }
   ],
   "imoveis": [
     {
       "id": 1,
-      "titulo": "Casa Ipe Modernista",
+      "titulo": "Casa Ipê Modernista",
       "tipo": "Casa",
       "operacao": "Venda",
       "bairro": "Jardins",
-      "cidade": "Sao Paulo",
+      "cidade": "São Paulo",
       "valor": 4250000,
       "quartos": 4,
       "banheiros": 3,
@@ -69,15 +69,15 @@
       "imobiliariaId": 1,
       "corretorId": 1,
       "imageKey": "imovel-1",
-      "descricao": "Residencia com area gourmet, piscina e arquitetura contemporanea."
+      "descricao": "Residência com área gourmet, piscina e arquitetura contemporânea."
     },
     {
       "id": 2,
       "titulo": "Penthouse Aurora",
       "tipo": "Apartamento",
-      "operacao": "Locacao",
+      "operacao": "Locação",
       "bairro": "Vila Olimpia",
-      "cidade": "Sao Paulo",
+      "cidade": "São Paulo",
       "valor": 12900,
       "quartos": 3,
       "banheiros": 2,
@@ -85,7 +85,7 @@
       "imobiliariaId": 1,
       "corretorId": 1,
       "imageKey": "imovel-2",
-      "descricao": "Cobertura duplex com vista panoramica e varanda integrada."
+      "descricao": "Cobertura duplex com vista panorâmica e varanda integrada."
     },
     {
       "id": 3,
@@ -93,7 +93,7 @@
       "tipo": "Casa",
       "operacao": "Venda",
       "bairro": "Serra da Mantiqueira",
-      "cidade": "Campos do Jordao",
+      "cidade": "Campos do Jordão",
       "valor": 2890000,
       "quartos": 5,
       "banheiros": 4,
@@ -108,7 +108,7 @@
       "titulo": "Villa Costa Azul",
       "tipo": "Casa",
       "operacao": "Venda",
-      "bairro": "Buzios",
+      "bairro": "Búzios",
       "cidade": "Rio de Janeiro",
       "valor": 18500000,
       "quartos": 6,
@@ -117,7 +117,7 @@
       "imobiliariaId": 1,
       "corretorId": 1,
       "imageKey": "imovel-4",
-      "descricao": "Mansao com frente mar, area de lazer completa e acabamento premium."
+      "descricao": "Mansão com frente mar, área de lazer completa e acabamento premium."
     },
     {
       "id": 5,
@@ -133,14 +133,14 @@
       "imobiliariaId": 2,
       "corretorId": 2,
       "imageKey": "imovel-5",
-      "descricao": "Residencia de alto luxo com adega climatizada e ambientes amplos."
+      "descricao": "Residência de alto luxo com adega climatizada e ambientes amplos."
     },
     {
       "id": 6,
-      "titulo": "Paraiso Praiano",
+      "titulo": "Paraíso Praiano",
       "tipo": "Casa",
       "operacao": "Venda",
-      "bairro": "Itapua",
+      "bairro": "Itapuã",
       "cidade": "Salvador",
       "valor": 10500000,
       "quartos": 5,
@@ -149,11 +149,11 @@
       "imobiliariaId": 3,
       "corretorId": 3,
       "imageKey": "imovel-6",
-      "descricao": "Imovel pe na areia para residencia ou investimento em locacao de temporada."
+      "descricao": "Imóvel pé na areia para residência ou investimento em locação de temporada."
     },
     {
       "id": 7,
-      "titulo": "Jardim das Acacias",
+      "titulo": "Jardim das Acácias",
       "tipo": "Casa",
       "operacao": "Venda",
       "bairro": "Cambui",
@@ -165,15 +165,15 @@
       "imobiliariaId": 1,
       "corretorId": 1,
       "imageKey": "imovel-7",
-      "descricao": "Casa com jardim amplo, area gourmet e projeto contemporaneo."
+      "descricao": "Casa com jardim amplo, área gourmet e projeto contemporâneo."
     },
     {
       "id": 8,
-      "titulo": "Loft Contemporaneo",
+      "titulo": "Loft Contemporâneo",
       "tipo": "Loft",
-      "operacao": "Locacao",
+      "operacao": "Locação",
       "bairro": "Pinheiros",
-      "cidade": "Sao Paulo",
+      "cidade": "São Paulo",
       "valor": 11200,
       "quartos": 2,
       "banheiros": 2,
@@ -181,7 +181,7 @@
       "imobiliariaId": 2,
       "corretorId": 2,
       "imageKey": "imovel-8",
-      "descricao": "Loft com pe-direito alto, varanda urbana e vista para a cidade."
+      "descricao": "Loft com pé-direito alto, varanda urbana e vista para a cidade."
     },
     {
       "id": 9,
@@ -189,7 +189,7 @@
       "tipo": "Casa",
       "operacao": "Venda",
       "bairro": "Vila Madalena",
-      "cidade": "Sao Paulo",
+      "cidade": "São Paulo",
       "valor": 5450000,
       "quartos": 4,
       "banheiros": 3,
@@ -197,15 +197,15 @@
       "imobiliariaId": 3,
       "corretorId": 3,
       "imageKey": "imovel-9",
-      "descricao": "Imovel residencial com living integrado e acabamento sofisticado."
+      "descricao": "Imóvel residencial com living integrado e acabamento sofisticado."
     },
     {
       "id": 10,
-      "titulo": "Refugio da Serra",
+      "titulo": "Refúgio da Serra",
       "tipo": "Casa",
       "operacao": "Venda",
       "bairro": "Alto da Serra",
-      "cidade": "Campos do Jordao",
+      "cidade": "Campos do Jordão",
       "valor": 4780000,
       "quartos": 6,
       "banheiros": 5,
@@ -213,15 +213,15 @@
       "imobiliariaId": 1,
       "corretorId": 1,
       "imageKey": "imovel-10",
-      "descricao": "Casa de montanha com lareira, deck panoramico e muito conforto."
+      "descricao": "Casa de montanha com lareira, deck panorâmico e muito conforto."
     },
     {
       "id": 11,
-      "titulo": "Refugio Maritimo",
+      "titulo": "Refúgio Marítimo",
       "tipo": "Casa",
       "operacao": "Venda",
       "bairro": "Enseada",
-      "cidade": "Guaruja",
+      "cidade": "Guarujá",
       "valor": 11200000,
       "quartos": 6,
       "banheiros": 5,
@@ -229,13 +229,13 @@
       "imobiliariaId": 2,
       "corretorId": 2,
       "imageKey": "imovel-11",
-      "descricao": "Residencia litoranea com piscina, espaco gourmet e ampla varanda."
+      "descricao": "Residência litorânea com piscina, espaço gourmet e ampla varanda."
     },
     {
       "id": 12,
       "titulo": "Cobertura Nova Iorque",
       "tipo": "Apartamento",
-      "operacao": "Locacao",
+      "operacao": "Locação",
       "bairro": "Ipanema",
       "cidade": "Rio de Janeiro",
       "valor": 32900,
@@ -245,15 +245,15 @@
       "imobiliariaId": 3,
       "corretorId": 3,
       "imageKey": "imovel-12",
-      "descricao": "Cobertura com vista para o mar, design autoral e alto padrao."
+      "descricao": "Cobertura com vista para o mar, design autoral e alto padrão."
     },
     {
       "id": 13,
-      "titulo": "Casa Artistica",
+      "titulo": "Casa Artística",
       "tipo": "Casa",
       "operacao": "Venda",
       "bairro": "Pinheiros",
-      "cidade": "Sao Paulo",
+      "cidade": "São Paulo",
       "valor": 6750000,
       "quartos": 5,
       "banheiros": 4,
@@ -261,7 +261,7 @@
       "imobiliariaId": 1,
       "corretorId": 1,
       "imageKey": "imovel-13",
-      "descricao": "Projeto com linguagem artistica, iluminacao natural e espacos fluidos."
+      "descricao": "Projeto com linguagem artística, iluminação natural e espaços fluidos."
     },
     {
       "id": 14,
@@ -277,7 +277,7 @@
       "imobiliariaId": 2,
       "corretorId": 2,
       "imageKey": "imovel-14",
-      "descricao": "Palacete urbano com arquitetura classica e infraestrutura completa."
+      "descricao": "Palacete urbano com arquitetura clássica e infraestrutura completa."
     },
     {
       "id": 15,
@@ -285,7 +285,7 @@
       "tipo": "Casa",
       "operacao": "Venda",
       "bairro": "Itaipava",
-      "cidade": "Petropolis",
+      "cidade": "Petrópolis",
       "valor": 12500000,
       "quartos": 7,
       "banheiros": 5,
@@ -293,7 +293,7 @@
       "imobiliariaId": 3,
       "corretorId": 3,
       "imageKey": "imovel-15",
-      "descricao": "Propriedade serrana com area verde extensa e acabamento de luxo."
+      "descricao": "Propriedade serrana com área verde extensa e acabamento de luxo."
     }
   ],
   "propostas": [
@@ -302,7 +302,7 @@
       "imovelId": 2,
       "cliente": "Renata Lima",
       "valorOferta": 12500,
-      "status": "Em analise",
+      "status": "Em análise",
       "dataContato": "2026-05-10",
       "corretorId": 1
     },
@@ -320,7 +320,7 @@
       "imovelId": 4,
       "cliente": "Fernanda Souza",
       "valorOferta": 10150000,
-      "status": "Negociacao",
+      "status": "Negociação",
       "dataContato": "2026-05-18",
       "corretorId": 3
     }

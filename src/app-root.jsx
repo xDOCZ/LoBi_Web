@@ -53,7 +53,7 @@ export function AppRoot() {
         setError("");
       } catch (loadError) {
         console.error(loadError);
-        setError("Nao foi possivel carregar os dados do arquivo JSON.");
+        setError("Não foi possível carregar os dados do arquivo JSON.");
       } finally {
         setLoading(false);
       }

@@ -94,7 +94,7 @@ export function HomePage() {
       </section>
 
       <section className="mb-10">
-        <h2 className="mb-4 font-display text-3xl text-[var(--olive-deep)]">Imóveis em destaque</h2>
+        <h2 className="mb-4 font-display text-3xl text-[var(--olive-deep)]">Destaques</h2>
         <div className="grid gap-4 md:grid-cols-3">
           {featuredImoveis.map((item) => {
             const gallery = imageGalleryMap[item.imageKey] || [imageMap[item.imageKey]].filter(Boolean);

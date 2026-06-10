@@ -40,7 +40,7 @@ export function PropostasPage() {
         fields={[
           {
             name: "imovelId",
-            label: "Imovel",
+            label: "Imóvel",
             type: "number",
             required: true,
             options: imovelOptions,
