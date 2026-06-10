@@ -244,7 +244,7 @@ export function ImoveisPage() {
       </section>
 
       <EntityCrudTable
-        title="Imóveis Cadastrados"
+        title="Cadastro de Imóveis"
         rows={data.imoveis}
         fields={fields}
         onCreate={handleCreateImovel}
