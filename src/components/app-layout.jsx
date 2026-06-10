@@ -7,7 +7,7 @@ const navItems = [
   { to: "/imoveis", label: "Imóveis" },
   { to: "/agentes", label: "Corretores" },
   { to: "/imobiliarias", label: "Imobiliárias" },
-  { to: "/propostas", label: "Negociações" },
+  { to: "/propostas", label: "Propostas" },
   { to: "/admin", label: "Painel" },
 ];
 
@@ -15,7 +15,7 @@ export function AppLayout({ title, subtitle, children }) {
   const { isAdmin, logout } = useAuth();
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-background text-foreground">
+    <div className="relative flex min-h-screen flex-col overflow-hidden bg-background text-foreground">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-[440px] overflow-hidden">
         <img src={heroVilla} alt="" className="h-full w-full object-cover opacity-20" aria-hidden />
         <div className="absolute inset-0 bg-gradient-to-b from-[var(--olive-deep)]/75 via-[var(--olive-deep)]/45 to-background" />
@@ -52,8 +52,8 @@ export function AppLayout({ title, subtitle, children }) {
                 LB
               </text>
             </svg>
-            <span className="font-display text-lg font-semibold text-[var(--cream)] md:text-[var(--olive-deep)]">
-              Lo&amp;Bi
+            <span className="font-display text-2xl font-bold tracking-tight text-[var(--cream)] md:text-3xl md:text-[var(--olive-deep)]">
+              Lo<span className="text-[var(--gold-deep)]">&amp;</span>Bi
             </span>
           </Link>
 
@@ -88,7 +88,7 @@ export function AppLayout({ title, subtitle, children }) {
         </div>
       </header>
 
-      <main className="relative z-10 mx-auto max-w-7xl px-6 py-10">
+      <main className="relative z-10 mx-auto w-full max-w-7xl flex-1 px-6 py-10">
         <section className="mb-8 rounded-sm border border-border bg-card/95 p-6 shadow-[var(--shadow-elegant)]">
           <p className="text-xs uppercase tracking-[0.28em] text-[var(--gold-deep)]">Lo&Bi | Realizando sonhos</p>
           <h1 className="mt-3 font-display text-4xl text-[var(--olive-deep)] md:text-5xl">{title}</h1>
@@ -96,6 +96,52 @@ export function AppLayout({ title, subtitle, children }) {
         </section>
         {children}
       </main>
+
+      <footer className="relative z-10 border-t border-border/60 bg-background/80 backdrop-blur">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-6 py-6 md:flex-row">
+          <Link to="/" className="flex items-center gap-2">
+            <svg
+              width="40"
+              height="40"
+              viewBox="0 0 40 40"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                <linearGradient id="logoGradientFooter" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#B8943D" />
+                  <stop offset="100%" stopColor="#6B7A3D" />
+                </linearGradient>
+              </defs>
+              <rect width="40" height="40" rx="6" fill="url(#logoGradientFooter)" opacity="0.15" />
+              <rect width="40" height="40" rx="6" fill="none" stroke="url(#logoGradientFooter)" strokeWidth="1.5" opacity="0.3" />
+              <text
+                x="20"
+                y="27"
+                fontSize="18"
+                fontWeight="700"
+                textAnchor="middle"
+                fill="url(#logoGradientFooter)"
+                fontFamily="Instrument Serif, Georgia, serif"
+                letterSpacing="-0.02em"
+              >
+                LB
+              </text>
+            </svg>
+            <div className="flex flex-col">
+              <span className="font-display text-xl font-bold tracking-tight text-[var(--olive-deep)]">
+                Lo<span className="text-[var(--gold-deep)]">&amp;</span>Bi
+              </span>
+              <span className="text-xs uppercase tracking-[0.28em] text-[var(--gold-deep)]">
+                Realizando sonhos
+              </span>
+            </div>
+          </Link>
+          <p className="text-center text-xs text-muted-foreground md:text-right">
+            © {new Date().getFullYear()} Lo&amp;Bi — Todos os direitos reservados.
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }
